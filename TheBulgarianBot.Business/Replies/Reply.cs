@@ -15,12 +15,10 @@
         /// <param name="replyType">The type of reply.</param>
         /// <param name="replyTo">A list of regular expressions to which the reply should be sent if they match with the
         /// message that was sent.</param>
-        /// <param name="parseMode">The parse mode for the message.</param>
-        protected Reply(ReplyType replyType, IEnumerable<Regex> replyTo, ParseMode parseMode)
+        protected Reply(ReplyType replyType, IEnumerable<Regex> replyTo)
         {
             this.ReplyType = replyType;
             this.ReplyTo = replyTo;
-            this.ParseMode = parseMode;
         }
 
         /// <summary>
@@ -33,10 +31,5 @@
         /// that was sent.
         /// </summary>
         public IEnumerable<Regex> ReplyTo { get; set; } 
-
-        /// <summary>
-        /// Gets or sets the parse mode for the message.
-        /// </summary>
-        public ParseMode ParseMode { get; set; }
     }
 }

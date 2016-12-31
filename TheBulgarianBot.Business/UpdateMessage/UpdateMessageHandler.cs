@@ -76,14 +76,20 @@
             switch (reply.ReplyType)
             {
                 case ReplyType.Text:
+                    var textReply = (TextReply) reply;
                     botClient.SendTextMessageAsync(
                             chatId: message.Chat.Id,
-                            text: ((TextReply)reply).Message,
+                            text: textReply.Message,
                             replyToMessageId: message.MessageId,
-                            parseMode: reply.ParseMode);
+                            parseMode: textReply.ParseMode);
                     break;
                 case ReplyType.Photo:
-
+                    var photoReply = (PhotoReply) reply;
+                    botClient.SendPhotoAsync(
+                        chatId: message.Chat.Id,
+                        photo: photoReply.FileToSend,
+                        caption: photoReply.Caption,
+                        replyToMessageId: message.MessageId);
                     break;
                 default:
                     Logger.Logger.WriteLogAsync("[EXCEPTION]: Invalid reply type encountered.");

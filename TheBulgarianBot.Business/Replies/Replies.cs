@@ -2,6 +2,8 @@
 {
     using System.Collections.Generic;
     using System.Text.RegularExpressions;
+    using Resource;
+    using Telegram.Bot.Types;
     using Telegram.Bot.Types.Enums;
 
     /// <summary>
@@ -89,6 +91,13 @@
                         new Regex(@"\b Koga (triabva|trqbva) da (pia|piq)\b", RegexOptions.IgnoreCase),
                         new Regex(@"\b Koga da (pia|piq)\b", RegexOptions.IgnoreCase),
                         new Regex(@"\b Кога трябва? да пия\b", RegexOptions.IgnoreCase),
+                    }),
+                new PhotoReply(
+                    fileName: "rakia.png",
+                    caption: "The best drink man can get - RAKIA!",
+                    replyTo: new List<Regex>
+                    {
+                        new Regex(@"\bWhat do Bulgarians drink\b", RegexOptions.IgnoreCase)
                     })
             };
         }

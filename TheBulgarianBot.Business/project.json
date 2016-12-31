@@ -11,6 +11,9 @@
     }
   },
   "buildOptions": {
-    "xmlDoc": true
+    "xmlDoc": true,
+    "embed": {
+      "includeFiles": [ "../Resource/rakia.png" ]
+    }
   }
 }

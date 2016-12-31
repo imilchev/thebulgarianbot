@@ -18,14 +18,20 @@
         /// <param name="parseMode">The parse mode for the message. By default set to <see cref="ParseMode.Default"/>.
         /// </param>
         public TextReply(string message, IEnumerable<Regex> replyTo, ParseMode parseMode = ParseMode.Default)
-            : base(replyType: ReplyType.Text, replyTo: replyTo, parseMode: parseMode)
+            : base(replyType: ReplyType.Text, replyTo: replyTo)
         {
             this.Message = message;
+            this.ParseMode = parseMode;
         }
 
         /// <summary>
         /// Gets or sets the message of the reply.
         /// </summary>
         public string Message { get; set; }
+
+        /// <summary>
+        /// Gets or sets the parse mode for the message.
+        /// </summary>
+        public ParseMode ParseMode { get; set; }
     }
 }
