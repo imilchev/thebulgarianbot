@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace TheBulgarianBot.Application
+﻿namespace TheBulgarianBot.Application
 {
+    using System;
+
+    /// <summary>
+    /// Entry point for the console application.
+    /// </summary>
     public class Program
     {
+        /// <summary>
+        /// The entry point for the console application.
+        /// </summary>
+        /// <param name="args">The launch arguments.</param>
         public static void Main(string[] args)
         {
             var theBulgarianBot = new Business.TheBulgarianBot();

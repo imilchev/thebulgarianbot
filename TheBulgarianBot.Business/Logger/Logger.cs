@@ -1,22 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Telegram.Bot.Types;
-
-namespace TheBulgarianBot.Business.Logger
+﻿namespace TheBulgarianBot.Business.Logger
 {
+    using System;
+    using System.IO;
+    using System.Threading.Tasks;
+    using Telegram.Bot.Types;
+
+    /// <summary>
+    /// Static class for logging messages in a log file.
+    /// </summary>
     public static class Logger
     {
+        /// <summary>
+        /// The base file name for the log file.
+        /// </summary>
         private const string logFileBase = @"C:/TheBulgarianBot/log_";
 
-        public static void LogAsync(Message message)
+        /// <summary>
+        /// Logs a <see cref="Message"/> in the log file.
+        /// </summary>
+        /// <param name="message">The <see cref="Message"/> to be logged.</param>
+        public static void LogMessageAsync(Message message)
         {
             Logger.WriteLogAsync($"[{message.Date}] {message.From.FirstName} {message.From.LastName}: {message.Text}");
         }
 
+        /// <summary>
+        /// Logs a string message in the log file.
+        /// </summary>
+        /// <param name="message">The message to be logged.</param>
         public static async void WriteLogAsync(string message)
         {
             await Task.Run(() =>

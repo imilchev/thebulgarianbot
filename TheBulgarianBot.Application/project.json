@@ -1,7 +1,8 @@
 {
   "version": "1.0.0-*",
   "buildOptions": {
-    "emitEntryPoint": true
+    "emitEntryPoint": true,
+    "xmlDoc": true
   },
 
   "dependencies": {
@@ -9,6 +10,7 @@
       "type": "platform",
       "version": "1.0.1"
     },
+    "StyleCop.Analyzers": "1.0.0",
     "TheBulgarianBot.Business": "1.0.0-*"
   },
 

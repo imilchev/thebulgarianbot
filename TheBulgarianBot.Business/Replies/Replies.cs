@@ -1,24 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using Telegram.Bot.Types.Enums;
-
-namespace TheBulgarianBot.Business.Replies
+﻿namespace TheBulgarianBot.Business.Replies
 {
+    using System.Collections.Generic;
+    using System.Text.RegularExpressions;
+    using Telegram.Bot.Types.Enums;
+
+    /// <summary>
+    /// A static class containing the replies.
+    /// </summary>
     internal static class Replies
     {
+        /// <summary>
+        /// The default direct reply that will be sent whenever the user directly adresses the bot, but there is no
+        /// predefined reply.
+        /// </summary>
         public static Reply DefaultDirectReply;
+
+        /// <summary>
+        /// The list with replies that are used for global chat messages.
+        /// </summary>
         public static List<Reply> RepliesList;
+
+        /// <summary>
+        /// The list with replies that are used when the bot is addressed directly.
+        /// </summary>
         public static List<Reply> DirectReplies;
 
+        /// <summary>
+        /// Initializes the static fields of the <see cref="Replies"/> class.
+        /// </summary>
         static Replies()
         {
+            // Default direct reply.
             Replies.DefaultDirectReply = new TextReply(
                 message: "WTF are you talking about, kopele?",
                 replyTo: new List<Regex>());
 
+            // Replies list.
             Replies.RepliesList = new List<Reply>
             {
                 new TextReply(
@@ -56,6 +73,7 @@ namespace TheBulgarianBot.Business.Replies
                     parseMode: ParseMode.Markdown)
             };
 
+            // Direct replies.
             Replies.DirectReplies = new List<Reply>
             {
                 new TextReply(
