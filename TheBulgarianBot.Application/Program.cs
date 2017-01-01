@@ -1,9 +1,6 @@
 ﻿namespace TheBulgarianBot.Application
 {
     using System;
-    using System.IO;
-    using System.Linq;
-    using System.Reflection;
 
     /// <summary>
     /// Entry point for the console application.
@@ -21,15 +18,6 @@
             Console.WriteLine("The bot is started.");
 
             Console.WriteLine();
-
-            var assembly = Assembly.GetEntryAssembly();
-            var resourceName = "TheBulgarianBot.Application.rakia.png";
-
-            foreach (var i in Assembly.Load(new AssemblyName("TheBulgarianBot.Business")).GetManifestResourceNames())
-            {
-                Console.WriteLine(i);   
-            }
-
             Console.WriteLine("Press any key to kill the bot...");
             Console.ReadLine();
         }

@@ -1,5 +1,6 @@
 ﻿namespace TheBulgarianBot.Business.UpdateMessage
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Replies;
@@ -10,6 +11,19 @@
 
     internal class UpdateMessageHandler
     {
+        /// <summary>
+        /// Holds the instance for random generation.
+        /// </summary>
+        private static readonly Random rand;
+
+        /// <summary>
+        /// Initializes the static fields of the <see cref="UpdateMessageHandler"/> class.
+        /// </summary>
+        static UpdateMessageHandler()
+        {
+            UpdateMessageHandler.rand = new Random();
+        }
+
         /// <summary>
         /// Handles the update event for the bot.
         /// </summary>
@@ -98,14 +112,20 @@
         }
 
         /// <summary>
-        /// Finds the corresponding reply for the received message. Null if no reply was found.
+        /// Finds the corresponding reply for the received message. In case there are multiple replies a random one is
+        /// picked. Null if no reply was found.
         /// </summary>
         /// <param name="replies">The list with replies from which one should be picked.</param>
         /// <param name="messageText">The text of the message that was received.</param>
-        /// <returns>The corresponding reply if one was found, otherwise false.</returns>
+        /// <returns>The corresponding reply if one was found or a random one if many matches. Null if no reply was
+        /// found.</returns>
         private Reply MatchReply(List<Reply> replies, string messageText)
         {
-            return replies.FirstOrDefault(r => r.ReplyTo.Any(m => m.IsMatch(messageText)));
+            var matchingReplies = replies.Where(r => r.ReplyTo.Any(m => m.IsMatch(messageText))).ToList();
+
+            return matchingReplies.Count > 0 
+                ? matchingReplies[UpdateMessageHandler.rand.Next(matchingReplies.Count)]
+                : null;
         }
     }
 }

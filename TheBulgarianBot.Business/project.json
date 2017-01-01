@@ -13,7 +13,13 @@
   "buildOptions": {
     "xmlDoc": true,
     "embed": {
-      "includeFiles": [ "../Resource/rakia.png" ]
+      "includeFiles": [
+        "Resource/rakia.png",
+        "Resource/bulgaria.jpg"
+      ]
     }
+  },
+  "runtimes": {
+    "win10-x64": {}
   }
 }

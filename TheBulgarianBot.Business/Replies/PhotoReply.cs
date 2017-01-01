@@ -1,18 +1,15 @@
 ﻿namespace TheBulgarianBot.Business.Replies
 {
     using System.Collections.Generic;
-    using System.IO;
     using System.Text.RegularExpressions;
     using Resource;
     using Telegram.Bot.Types;
-    using Telegram.Bot.Types.Enums;
 
     /// <summary>
     /// A class representing a photo reply.
     /// </summary>
     internal class PhotoReply : Reply
     {
-        // TODO: fix photo type
         /// <summary>
         /// Initializes a new instance of the <see cref="PhotoReply"/> class.
         /// </summary>

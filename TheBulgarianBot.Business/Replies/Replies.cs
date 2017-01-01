@@ -1,6 +1,7 @@
 ﻿namespace TheBulgarianBot.Business.Replies
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Text.RegularExpressions;
     using Resource;
     using Telegram.Bot.Types;
@@ -12,7 +13,7 @@
     internal static class Replies
     {
         /// <summary>
-        /// The default direct reply that will be sent whenever the user directly adresses the bot, but there is no
+        /// The default direct reply that will be sent whenever the user directly addresses the bot, but there is no
         /// predefined reply.
         /// </summary>
         public static Reply DefaultDirectReply;
@@ -44,33 +45,33 @@
                     message: "```triggered```",
                     replyTo: new List<Regex>
                     {
-                        new Regex(@"\bfree\b")
+                        new Regex(@"\bfree\b", RegexOptions.IgnoreCase)
                     },
                     parseMode: ParseMode.Markdown),
                 new TextReply(
                     message: "SEAL THE DEAL AND LET'S BOOGIE!",
                     replyTo: new List<Regex>
                     {
-                        new Regex(@"\bdiscounts?\b"),
-                        new Regex(@"\bsales?\b"),
-                        new Regex(@"\bcheap(er)?\b"),
-                        new Regex(@"\bразпродажб(а|и)\b"),
-                        new Regex(@"\brazprodajb(a|i)\b")
+                        new Regex(@"\bdiscounts?\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bsales?\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bcheap(er)?\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bразпродажб(а|и)\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\brazprodajb(a|i)\b", RegexOptions.IgnoreCase)
                     }),
                 new TextReply(
                     message: "Zdravei, uruspia",
                     replyTo: new List<Regex>
                     {
-                        new Regex(@"\bangelica\b"),
-                        new Regex(@"\bgirls?\b"),
-                        new Regex(@"\bwom(a|e)n\b")
+                        new Regex(@"\bangelica\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bgirls?\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bwom(a|e)n\b", RegexOptions.IgnoreCase)
                     }),
                 new TextReply(
                     message: "*Gas chamber!*",
                     replyTo: new List<Regex>
                     {
-                        new Regex(@"\bnigg(a|er)\b"),
-                        new Regex(@"\bblack\b")
+                        new Regex(@"\bnigg(a|er)\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bblack\b", RegexOptions.IgnoreCase)
                     },
                     parseMode: ParseMode.Markdown)
             };
@@ -82,7 +83,7 @@
                     message: "Every time is a good time for drinking!",
                     replyTo: new List<Regex>
                     {
-                        new Regex(@"\b When (should|must) \w drink\b", RegexOptions.IgnoreCase)
+                        new Regex(@"\b When (should|must) ([^\s]+) drink\b", RegexOptions.IgnoreCase)
                     }),
                 new TextReply(
                     message: "Po vsqko vreme!",
@@ -94,10 +95,48 @@
                     }),
                 new PhotoReply(
                     fileName: "rakia.png",
-                    caption: "The best drink man can get - RAKIA!",
+                    caption: "The best drink man can get - RAKIA! Mamka mu!",
                     replyTo: new List<Regex>
                     {
-                        new Regex(@"\bWhat do Bulgarians drink\b", RegexOptions.IgnoreCase)
+                        new Regex(@"\bWhat do Bulgarians drink\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bNational drink\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bWhat (to|should) \w drink\b", RegexOptions.IgnoreCase)
+                    }),
+                new PhotoReply(
+                    fileName: "rakia.png",
+                    caption: "Rakia we, kvo moje da piem??",
+                    replyTo: new List<Regex>
+                    {
+                        new Regex(@"\bK(ak)?vo (sh(te)?)? piem\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bК(ак)?во (ще)? пием\b", RegexOptions.IgnoreCase)
+                    }),
+                new TextReply(
+                    message: "Mainata ti!",
+                    replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
+                new TextReply(
+                    message: "Da go duhash, pedal!",
+                    replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
+                new TextReply(
+                    message: "Gol da go barash!",
+                    replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
+                new TextReply(
+                    message: "Ebi si maikata!",
+                    replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
+                new TextReply(
+                    message: "Ti pa si mnogo ubav!",
+                    replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
+                new TextReply(
+                    message: "Maika ti te e sabirala s lajica ot poda :)",
+                    replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
+                new PhotoReply(
+                    fileName: "bulgaria.jpg",
+                    caption: null,
+                    replyTo: new List<Regex>
+                    {
+                        new Regex(@"\bshow (\w+)? bulgaria\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\btell \w? bulgaria\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bпокажи \w? българия\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bpokaji \w? b(u|a)lgari(a|q)\b", RegexOptions.IgnoreCase),
                     })
             };
         }
