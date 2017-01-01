@@ -11,6 +11,7 @@
         public static List<Regex> CurseRegexes;
         public static List<Regex> HowAreYouRegexes;
         public static List<Regex> HiRegexes;
+        public static List<Regex> BlackRegexes;
 
         /// <summary>
         /// Initializes the static fields of the <see cref="Regexes"/> class.
@@ -59,6 +60,19 @@
             {
                 new Regex(@"\bzdr(asti|avei)?\b", RegexOptions.IgnoreCase),
                 new Regex(@"\bздр(асти|авей)?\b", RegexOptions.IgnoreCase)
+            };
+            Regexes.BlackRegexes = new List<Regex>
+            {
+                new Regex(@"\bnigg(a|er)s?\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bblacks?\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bgips(y|ies)\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bmangali?\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bмангали?\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bcigan(in?|ka)\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bциган(ин?|ка)\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bjews?\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bevrein?\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bевреин?\b", RegexOptions.IgnoreCase),
             };
         }
     }

@@ -16,7 +16,8 @@
     "embed": {
       "includeFiles": [
         "Resource/rakia.png",
-        "Resource/bulgaria.jpg"
+        "Resource/bulgaria.jpg",
+        "Resource/hitler.jpg"
       ]
     }
   },

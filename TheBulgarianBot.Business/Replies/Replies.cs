@@ -68,12 +68,20 @@
                     }),
                 new TextReply(
                     message: "*Gas chamber!*",
-                    replyTo: new List<Regex>
-                    {
-                        new Regex(@"\bnigg(a|er)\b", RegexOptions.IgnoreCase),
-                        new Regex(@"\bblack\b", RegexOptions.IgnoreCase)
-                    },
-                    parseMode: ParseMode.Markdown)
+                    replyTo: new List<Regex>().Concat(Regexes.BlackRegexes),
+                    parseMode: ParseMode.Markdown),
+                new TextReply(
+                    message: "*All gipsies should die!*",
+                    replyTo: new List<Regex>().Concat(Regexes.BlackRegexes),
+                    parseMode: ParseMode.Markdown),
+                new TextReply(
+                    message: "*Na sapun!*",
+                    replyTo: new List<Regex>().Concat(Regexes.BlackRegexes),
+                    parseMode: ParseMode.Markdown),
+                new PhotoReply(
+                    fileName: "hitler.jpg",
+                    replyTo: new List<Regex>().Concat(Regexes.BlackRegexes),
+                    caption: null)
             };
 
             // Direct replies.
@@ -83,15 +91,15 @@
                     message: "Every time is a good time for drinking!",
                     replyTo: new List<Regex>
                     {
-                        new Regex(@"\b When (should|must) ([^\s]+) drink\b", RegexOptions.IgnoreCase)
+                        new Regex(@"\bWhen (should|must) \w+ drink\b", RegexOptions.IgnoreCase)
                     }),
                 new TextReply(
                     message: "Po vsqko vreme!",
                     replyTo: new List<Regex>
                     {
-                        new Regex(@"\b Koga (triabva|trqbva) da (pia|piq)\b", RegexOptions.IgnoreCase),
-                        new Regex(@"\b Koga da (pia|piq)\b", RegexOptions.IgnoreCase),
-                        new Regex(@"\b Кога трябва? да пия\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bKoga (triabva|trqbva) da (pia|piq)\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bKoga da (pia|piq)\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bКога трябва? да пия\b", RegexOptions.IgnoreCase),
                     }),
                 new PhotoReply(
                     fileName: "rakia.png",
@@ -100,7 +108,8 @@
                     {
                         new Regex(@"\bWhat do Bulgarians drink\b", RegexOptions.IgnoreCase),
                         new Regex(@"\bNational drink\b", RegexOptions.IgnoreCase),
-                        new Regex(@"\bWhat (to|should) \w drink\b", RegexOptions.IgnoreCase)
+                        new Regex(@"\bWhat (to|should) \w+ drink\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bWhat to drink\b", RegexOptions.IgnoreCase)
                     }),
                 new PhotoReply(
                     fileName: "rakia.png",
