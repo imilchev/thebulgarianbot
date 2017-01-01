@@ -36,19 +36,21 @@
             {
                 case MessageType.TextMessage:
                     // Check if it was a direction mention.
-                    var isMentioned = args.Message.Chat.Type == ChatType.Private
-                        || args.Message.Text.StartsWith("@thebulgarianbot");
+                    var isMentioned = args.Message.Text.StartsWith("@thebulgarianbot");
+                    var isPrivate = args.Message.Chat.Type == ChatType.Private;
 
                     // Check whether the bot was directly addressed or if it was a normal message in the chat.
                     var reply = this.MatchReply(
-                        isMentioned
+                        isMentioned && !isPrivate
                             ? Replies.DirectReplies
-                            : Replies.RepliesList,
+                            : isPrivate
+                                ? Replies.RepliesList.Concat(Replies.DirectReplies).ToList()
+                                : Replies.RepliesList,
                         args.Message.Text);
 
                     // Log the message if it was directly addressed to the bot and no reply was found.
                     // Send the default direct reply to the user.
-                    if (reply == null && isMentioned)
+                    if (reply == null && (isMentioned || isPrivate))
                     {
                         Logger.Logger.LogMessageAsync(args.Message);
                         reply = Replies.DefaultDirectReply;

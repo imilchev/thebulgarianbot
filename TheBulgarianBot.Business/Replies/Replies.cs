@@ -3,8 +3,6 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text.RegularExpressions;
-    using Resource;
-    using Telegram.Bot.Types;
     using Telegram.Bot.Types.Enums;
 
     /// <summary>
@@ -140,7 +138,42 @@
                         new Regex(@"\bпокажи българия\b", RegexOptions.IgnoreCase),
                         new Regex(@"\bpokaji \w+ b(u|a)lgari(a|q)\b", RegexOptions.IgnoreCase),
                         new Regex(@"\bpokaji b(u|a)lgari(a|q)\b", RegexOptions.IgnoreCase),
-                    })
+                    }),
+                new TextReply(
+                    message: "Ti si pedal we, kaltak!",
+                    replyTo: new List<Regex>
+                    {
+                        new Regex(@"\bpedal\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bпедал\b", RegexOptions.IgnoreCase),
+                    }),
+                new TextReply(
+                    message: "Q trai we, lainar!",
+                    replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
+                new TextReply(
+                    message: "Na maika ti putkata :@",
+                    replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
+                new TextReply(
+                    message: "Neshtastnik",
+                    replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
+                new TextReply(
+                    message: "Mn qsno che sh piem we :)",
+                    replyTo: new List<Regex>
+                    {
+                        new Regex(@"\bsh(te)? piem li\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bще пием ли\b", RegexOptions.IgnoreCase)
+                    }),
+                new TextReply(
+                    message: "Extra sam, bepce :)",
+                    replyTo: new List<Regex>().Concat(Regexes.HowAreYouRegexes)),
+                new TextReply(
+                    message: "Belq krastavicata",
+                    replyTo: new List<Regex>().Concat(Regexes.HowAreYouRegexes)),
+                new TextReply(
+                    message: "Tiho we, kurvo",
+                    replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
+                new TextReply(
+                    message: "Maika ti e kuchka ;)",
+                    replyTo: new List<Regex>().Concat(Regexes.CurseRegexes))
             };
         }
     }
