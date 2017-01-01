@@ -1,16 +1,15 @@
-﻿namespace TheBulgarianBot.Business.UpdateMessage
+﻿namespace TheBulgarianBot.Business.Message
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Security.Cryptography.X509Certificates;
-    using Replies;
+    using global::TheBulgarianBot.Business.Replies;
     using Telegram.Bot;
     using Telegram.Bot.Args;
     using Telegram.Bot.Types;
     using Telegram.Bot.Types.Enums;
 
-    internal class UpdateMessageHandler
+    internal class OnMessageHandler
     {
         /// <summary>
         /// Holds the instance for random generation.
@@ -18,61 +17,46 @@
         private static readonly Random rand;
 
         /// <summary>
-        /// Initializes the static fields of the <see cref="UpdateMessageHandler"/> class.
+        /// Initializes the static fields of the <see cref="OnMessageHandler"/> class.
         /// </summary>
-        static UpdateMessageHandler()
+        static OnMessageHandler()
         {
-            UpdateMessageHandler.rand = new Random();
+            OnMessageHandler.rand = new Random();
         }
 
         /// <summary>
-        /// Handles the update event for the bot.
+        /// Handles the message received event.
         /// </summary>
         /// <param name="client">The bot client raising the event.</param>
-        /// <param name="args">The update event arguments</param>
-        public void OnUpdate(object client, UpdateEventArgs args)
+        /// <param name="args">The message event arguments.</param>
+        public void OnMessage(object client, MessageEventArgs args)
         {
             var botClient = (TelegramBotClient) client;
-            switch (args.Update.Type)
-            {
-                case UpdateType.MessageUpdate:
-                    this.OnMessageUpdate(botClient, args.Update);
-                    break;
-            }
-        }
-
-        /// <summary>
-        /// Handles the message update event for the bot.
-        /// </summary>
-        /// <param name="botClient">The bot client raising the event.</param>
-        /// <param name="update">The update data.</param>
-        private void OnMessageUpdate(TelegramBotClient botClient, Update update)
-        {
-            switch (update.Message.Type)
+            switch (args.Message.Type)
             {
                 case MessageType.TextMessage:
                     // Check if it was a direction mention.
-                    var isMentioned = update.Message.Text.StartsWith("@thebulgarianbot");
-                    
+                    var isMentioned = args.Message.Text.StartsWith("@thebulgarianbot");
+
                     // Check whether the bot was directly addressed or if it was a normal message in the chat.
                     var reply = this.MatchReply(
                         isMentioned
                             ? Replies.DirectReplies
                             : Replies.RepliesList,
-                        update.Message.Text);
+                        args.Message.Text);
 
                     // Log the message if it was directly addressed to the bot and no reply was found.
                     // Send the default direct reply to the user.
                     if (reply == null && isMentioned)
                     {
-                        Logger.Logger.LogMessageAsync(update.Message);
+                        Logger.Logger.LogMessageAsync(args.Message);
                         reply = Replies.DefaultDirectReply;
                     }
 
                     // If the reply is not null then send it back.
                     if (reply != null)
                     {
-                        this.SendReply(botClient, update.Message, reply);   
+                        this.SendReply(botClient, args.Message, reply);
                     }
 
                     break;
@@ -124,7 +108,7 @@
             var matchingReplies = replies.Where(r => r.ReplyTo.Any(m => m.IsMatch(messageText))).ToList();
 
             return matchingReplies.Count > 0 
-                ? matchingReplies[UpdateMessageHandler.rand.Next(matchingReplies.Count)]
+                ? matchingReplies[OnMessageHandler.rand.Next(matchingReplies.Count)]
                 : null;
         }
     }

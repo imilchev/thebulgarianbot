@@ -21,6 +21,8 @@
             Console.WriteLine();
             Console.WriteLine("Press any key to kill the bot...");
             Console.ReadLine();
+
+            theBulgarianBot.StopReceiving();
         }
     }
 }

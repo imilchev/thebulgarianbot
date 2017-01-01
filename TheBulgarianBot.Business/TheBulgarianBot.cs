@@ -1,7 +1,7 @@
 ﻿namespace TheBulgarianBot.Business
 {
+    using Message;
     using Telegram.Bot;
-    using UpdateMessage;
 
     /// <summary>
     /// The main entry point for the bot.
@@ -21,7 +21,7 @@
         /// <summary>
         /// The update message handler.
         /// </summary>
-        private readonly UpdateMessageHandler updateMessageHandler;
+        private readonly OnMessageHandler onMessageHandler;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TheBulgarianBot"/> class.
@@ -29,9 +29,9 @@
         public TheBulgarianBot()
         {
             this.botClient = new TelegramBotClient(token);
-            this.updateMessageHandler = new UpdateMessageHandler();
+            this.onMessageHandler = new OnMessageHandler();
 
-            this.botClient.OnUpdate += this.updateMessageHandler.OnUpdate;
+            this.botClient.OnMessage += this.onMessageHandler.OnMessage;
         }
 
         /// <summary>
@@ -40,6 +40,14 @@
         public void StartReceiving()
         {
             this.botClient.StartReceiving();
+        }
+
+        /// <summary>
+        /// Stops receiving messages and handling replies.
+        /// </summary>
+        public void StopReceiving()
+        {
+            this.botClient.StopReceiving();
         }
     }
 }
