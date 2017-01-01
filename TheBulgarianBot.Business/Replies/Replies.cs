@@ -139,7 +139,6 @@
                     replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
                 new PhotoReply(
                     fileName: "bulgaria.jpg",
-                    caption: null,
                     replyTo: new List<Regex>
                     {
                         new Regex(@"\bshow \w+ bulgaria\b", RegexOptions.IgnoreCase),

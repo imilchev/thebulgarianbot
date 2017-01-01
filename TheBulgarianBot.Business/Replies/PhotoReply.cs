@@ -14,10 +14,10 @@
         /// Initializes a new instance of the <see cref="PhotoReply"/> class.
         /// </summary>
         /// <param name="fileName">The name of the photo to be sent.</param>
-        /// <param name="caption">The caption for the photo.</param>
         /// <param name="replyTo">A list of regular expressions to which the reply should be sent if they match with the
         /// message that was sent.</param>
-        public PhotoReply(string fileName, string caption, IEnumerable<Regex> replyTo)
+        /// <param name="caption">The caption for the photo. By default set to null.</param>
+        public PhotoReply(string fileName, IEnumerable<Regex> replyTo, string caption = null)
             : base(replyType: ReplyType.Photo, replyTo: replyTo)
         {
             this.FileName = fileName;
