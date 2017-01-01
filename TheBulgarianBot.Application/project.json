@@ -7,8 +7,10 @@
 
   "dependencies": {
     "Microsoft.NETCore.App": {
+      "type": "platform",
       "version": "1.0.1"
     },
+    "Microsoft.CSharp": "4.0.1",
     "StyleCop.Analyzers": "1.0.0",
     "TheBulgarianBot.Business": "1.0.0-*"
   },
@@ -19,6 +21,7 @@
     }
   },
   "runtimes": {
+    "win81-x64": {},
     "win10-x64": {}
   }
 }

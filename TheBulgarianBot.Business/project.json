@@ -2,6 +2,7 @@
   "version": "1.0.0-*",
   "dependencies": {
     "NETStandard.Library": "1.6.0",
+    "Microsoft.CSharp": "4.0.1",
     "StyleCop.Analyzers": "1.0.0",
     "Telegram.Bot": "10.4.0"
   },
@@ -20,6 +21,7 @@
     }
   },
   "runtimes": {
+    "win81-x64": {}, 
     "win10-x64": {}
   }
 }
