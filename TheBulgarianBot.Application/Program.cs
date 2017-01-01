@@ -1,6 +1,7 @@
 ﻿namespace TheBulgarianBot.Application
 {
     using System;
+    using System.Reflection;
 
     /// <summary>
     /// Entry point for the console application.

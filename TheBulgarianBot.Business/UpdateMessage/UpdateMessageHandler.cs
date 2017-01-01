@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Security.Cryptography.X509Certificates;
     using Replies;
     using Telegram.Bot;
     using Telegram.Bot.Args;
@@ -31,13 +32,11 @@
         /// <param name="args">The update event arguments</param>
         public void OnUpdate(object client, UpdateEventArgs args)
         {
-            var botClient = (TelegramBotClient)client;
+            var botClient = (TelegramBotClient) client;
             switch (args.Update.Type)
             {
                 case UpdateType.MessageUpdate:
                     this.OnMessageUpdate(botClient, args.Update);
-                    break;
-                default:
                     break;
             }
         }
@@ -52,16 +51,19 @@
             switch (update.Message.Type)
             {
                 case MessageType.TextMessage:
+                    // Check if it was a direction mention.
+                    var isMentioned = update.Message.Text.StartsWith("@thebulgarianbot");
+                    
                     // Check whether the bot was directly addressed or if it was a normal message in the chat.
                     var reply = this.MatchReply(
-                        update.Message.Text.StartsWith("@thebulgarianbot")
+                        isMentioned
                             ? Replies.DirectReplies
                             : Replies.RepliesList,
                         update.Message.Text);
 
                     // Log the message if it was directly addressed to the bot and no reply was found.
                     // Send the default direct reply to the user.
-                    if (reply == null && update.Message.Text.StartsWith("@thebulgarianbot"))
+                    if (reply == null && isMentioned)
                     {
                         Logger.Logger.LogMessageAsync(update.Message);
                         reply = Replies.DefaultDirectReply;
@@ -73,8 +75,6 @@
                         this.SendReply(botClient, update.Message, reply);   
                     }
 
-                    break;
-                default:
                     break;
             }
         }

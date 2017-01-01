@@ -133,10 +133,13 @@
                     caption: null,
                     replyTo: new List<Regex>
                     {
-                        new Regex(@"\bshow (\w+)? bulgaria\b", RegexOptions.IgnoreCase),
-                        new Regex(@"\btell \w? bulgaria\b", RegexOptions.IgnoreCase),
-                        new Regex(@"\bпокажи \w? българия\b", RegexOptions.IgnoreCase),
-                        new Regex(@"\bpokaji \w? b(u|a)lgari(a|q)\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bshow \w+ bulgaria\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\btell \w+ bulgaria\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bshow bulgaria\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bпокажи \w+ българия\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bпокажи българия\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bpokaji \w+ b(u|a)lgari(a|q)\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bpokaji b(u|a)lgari(a|q)\b", RegexOptions.IgnoreCase),
                     })
             };
         }

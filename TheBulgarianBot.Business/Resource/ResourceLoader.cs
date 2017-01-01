@@ -21,7 +21,7 @@
         public static Stream LoadResource(string resource)
         {
             var assembly = Assembly.Load(new AssemblyName(ResourceLoader.assemblyName));
-            var resourceName = $"{ResourceLoader.assemblyName}.{resource}";
+            var resourceName = $"{ResourceLoader.assemblyName}.Resource.{resource}";
 
             return assembly.GetManifestResourceStream(resourceName);
         }
