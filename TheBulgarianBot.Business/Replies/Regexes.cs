@@ -10,8 +10,7 @@
     {
         public static List<Regex> CurseRegexes;
         public static List<Regex> HowAreYouRegexes;
-
-        // TODO: add 'hi' regexes
+        public static List<Regex> HiRegexes;
 
         /// <summary>
         /// Initializes the static fields of the <see cref="Regexes"/> class.
@@ -51,8 +50,15 @@
                 new Regex(@"\bk(ak)?vo pra(i|vish)sh\b", RegexOptions.IgnoreCase),
                 new Regex(@"\bkak si\b", RegexOptions.IgnoreCase),
                 new Regex(@"\bк(ак)?во пра(в)?(и|й)ш\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bk(ak)?vo sta(v)?a\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bк(ак)?во ста(в)?а\b", RegexOptions.IgnoreCase),
                 new Regex(@"\bhow are you\b", RegexOptions.IgnoreCase),
                 new Regex(@"\bwhat (are)? you doing\b", RegexOptions.IgnoreCase),
+            };
+            Regexes.HiRegexes = new List<Regex>
+            {
+                new Regex(@"\bzdr(asti|avei)?\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bздр(асти|авей)?\b", RegexOptions.IgnoreCase)
             };
         }
     }

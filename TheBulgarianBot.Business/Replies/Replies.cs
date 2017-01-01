@@ -52,6 +52,8 @@
                     {
                         new Regex(@"\bdiscounts?\b", RegexOptions.IgnoreCase),
                         new Regex(@"\bsales?\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bevtino?\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bевтино?\b", RegexOptions.IgnoreCase),
                         new Regex(@"\bcheap(er)?\b", RegexOptions.IgnoreCase),
                         new Regex(@"\bразпродажб(а|и)\b", RegexOptions.IgnoreCase),
                         new Regex(@"\brazprodajb(a|i)\b", RegexOptions.IgnoreCase)
@@ -173,7 +175,16 @@
                     replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
                 new TextReply(
                     message: "Maika ti e kuchka ;)",
-                    replyTo: new List<Regex>().Concat(Regexes.CurseRegexes))
+                    replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
+                new TextReply(
+                    message: "Zdrasti",
+                    replyTo: new List<Regex>().Concat(Regexes.HiRegexes)),
+                new TextReply(
+                    message: "Zdravei",
+                    replyTo: new List<Regex>().Concat(Regexes.HiRegexes)),
+                new TextReply(
+                    message: "Zdr :*",
+                    replyTo: new List<Regex>().Concat(Regexes.HiRegexes)),
             };
         }
     }
