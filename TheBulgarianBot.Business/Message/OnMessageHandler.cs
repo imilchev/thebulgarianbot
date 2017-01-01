@@ -36,7 +36,8 @@
             {
                 case MessageType.TextMessage:
                     // Check if it was a direction mention.
-                    var isMentioned = args.Message.Text.StartsWith("@thebulgarianbot");
+                    var isMentioned = args.Message.Chat.Type == ChatType.Private
+                        || args.Message.Text.StartsWith("@thebulgarianbot");
 
                     // Check whether the bot was directly addressed or if it was a normal message in the chat.
                     var reply = this.MatchReply(
@@ -78,7 +79,7 @@
                     botClient.SendTextMessageAsync(
                             chatId: message.Chat.Id,
                             text: textReply.Message,
-                            replyToMessageId: message.MessageId,
+                            replyToMessageId: message.Chat.Type == ChatType.Private ? 0 : message.MessageId,
                             parseMode: textReply.ParseMode);
                     break;
                 case ReplyType.Photo:
@@ -87,7 +88,7 @@
                         chatId: message.Chat.Id,
                         photo: photoReply.FileToSend,
                         caption: photoReply.Caption,
-                        replyToMessageId: message.MessageId);
+                        replyToMessageId: message.Chat.Type == ChatType.Private ? 0 : message.MessageId);
                     break;
                 default:
                     Logger.Logger.WriteLogAsync("[EXCEPTION]: Invalid reply type encountered.");
