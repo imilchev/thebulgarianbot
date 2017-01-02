@@ -13,7 +13,7 @@
         /// <summary>
         /// The base file name for the log file.
         /// </summary>
-        private const string logFileBase = @"C:/TheBulgarianBot/log_";
+        private const string logFileBase = @"D:/TheBulgarianBot/Logs/log_";
 
         /// <summary>
         /// Logs a <see cref="Message"/> in the log file.

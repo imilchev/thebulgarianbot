@@ -44,12 +44,17 @@
                 new Regex(@"\bkurva\b", RegexOptions.IgnoreCase),
                 new Regex(@"\bkuchka\b", RegexOptions.IgnoreCase),
                 new Regex(@"\bкучка\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bтъп\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bt(a|u)p\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bkopele\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bкопеле\b", RegexOptions.IgnoreCase),
             };
             Regexes.HowAreYouRegexes = new List<Regex>
             {
                 new Regex(@"\bkp\b", RegexOptions.IgnoreCase),
                 new Regex(@"\bk(ak)?vo pra(i|vish)sh\b", RegexOptions.IgnoreCase),
                 new Regex(@"\bkak si\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bкак си\b", RegexOptions.IgnoreCase),
                 new Regex(@"\bк(ак)?во пра(в)?(и|й)ш\b", RegexOptions.IgnoreCase),
                 new Regex(@"\bk(ak)?vo sta(v)?a\b", RegexOptions.IgnoreCase),
                 new Regex(@"\bк(ак)?во ста(в)?а\b", RegexOptions.IgnoreCase),
@@ -58,8 +63,12 @@
             };
             Regexes.HiRegexes = new List<Regex>
             {
-                new Regex(@"\bzdr(asti|avei)?\b", RegexOptions.IgnoreCase),
-                new Regex(@"\bздр(асти|авей)?\b", RegexOptions.IgnoreCase)
+                new Regex(@"\bzdr(asti+|avei)?\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bздр(асти|авей)?\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bhi+\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bhello+\b", RegexOptions.IgnoreCase),
+                new Regex(@"\beho+\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bехо+\b", RegexOptions.IgnoreCase)
             };
             Regexes.BlackRegexes = new List<Regex>
             {

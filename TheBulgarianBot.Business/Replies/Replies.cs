@@ -98,8 +98,10 @@
                     replyTo: new List<Regex>
                     {
                         new Regex(@"\bKoga (triabva|trqbva) da (pia|piq)\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bKoga sh(te)? (pia|piq|piem)\b", RegexOptions.IgnoreCase),
                         new Regex(@"\bKoga da (pia|piq)\b", RegexOptions.IgnoreCase),
-                        new Regex(@"\bКога трябва? да пия\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bКога (трябва)? да пия\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bКога (ще)? да пия\b", RegexOptions.IgnoreCase),
                     }),
                 new PhotoReply(
                     fileName: "rakia.png",
@@ -193,6 +195,12 @@
                 new TextReply(
                     message: "Zdr :*",
                     replyTo: new List<Regex>().Concat(Regexes.HiRegexes)),
+                new TextReply(
+                    message: "Tapak",
+                    replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
+                new TextReply(
+                    message: "Da ti eba maikata, kopele",
+                    replyTo: new List<Regex>().Concat(Regexes.CurseRegexes))
             };
         }
     }
