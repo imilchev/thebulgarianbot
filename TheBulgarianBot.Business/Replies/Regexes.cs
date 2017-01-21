@@ -12,6 +12,7 @@
         public static List<Regex> HowAreYouRegexes;
         public static List<Regex> HiRegexes;
         public static List<Regex> BlackRegexes;
+        public static List<Regex> AlcoholRegexes;
 
         /// <summary>
         /// Initializes the static fields of the <see cref="Regexes"/> class.
@@ -48,6 +49,14 @@
                 new Regex(@"\bt(a|u)p\b", RegexOptions.IgnoreCase),
                 new Regex(@"\bkopele\b", RegexOptions.IgnoreCase),
                 new Regex(@"\bкопеле\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bg(ay|ei)\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bгей\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bt(a|u)pak\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bтъпак\b", RegexOptions.IgnoreCase),
+                new Regex(@"\blainar\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bлайнар\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bprostak\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bпростак\b", RegexOptions.IgnoreCase)
             };
             Regexes.HowAreYouRegexes = new List<Regex>
             {
@@ -82,6 +91,16 @@
                 new Regex(@"\bjews?\b", RegexOptions.IgnoreCase),
                 new Regex(@"\bevrein?\b", RegexOptions.IgnoreCase),
                 new Regex(@"\bевреин?\b", RegexOptions.IgnoreCase),
+            };
+            Regexes.AlcoholRegexes = new List<Regex>
+            {
+                new Regex(@"\bwhiskey\b", RegexOptions.IgnoreCase),
+                new Regex(@"\b(y|u)iski\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bуиски\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bводка\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bvodka\b", RegexOptions.IgnoreCase),
+                new Regex(@"\br(u|o)m\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bром\b", RegexOptions.IgnoreCase),
             };
         }
     }

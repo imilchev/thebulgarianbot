@@ -8,6 +8,7 @@
     using Telegram.Bot.Args;
     using Telegram.Bot.Types;
     using Telegram.Bot.Types.Enums;
+    using TypicalCommand;
 
     internal class OnMessageHandler
     {
@@ -31,37 +32,18 @@
         /// <param name="args">The message event arguments.</param>
         public void OnMessage(object client, MessageEventArgs args)
         {
-            var botClient = (TelegramBotClient) client;
+            var botClient = (TelegramBotClient)client;
             switch (args.Message.Type)
             {
                 case MessageType.TextMessage:
-                    // Check if it was a direction mention.
-                    var isMentioned = args.Message.Text.StartsWith("@thebulgarianbot");
-                    var isPrivate = args.Message.Chat.Type == ChatType.Private;
-
-                    // Check whether the bot was directly addressed or if it was a normal message in the chat.
-                    var reply = this.MatchReply(
-                        isMentioned && !isPrivate
-                            ? Replies.DirectReplies
-                            : isPrivate
-                                ? Replies.RepliesList.Concat(Replies.DirectReplies).ToList()
-                                : Replies.RepliesList,
-                        args.Message.Text);
-
-                    // Log the message if it was directly addressed to the bot and no reply was found.
-                    // Send the default direct reply to the user.
-                    if (reply == null && (isMentioned || isPrivate))
+                    if (args.Message.Text.StartsWith("/"))
                     {
-                        Logger.Logger.LogMessageAsync(args.Message);
-                        reply = Replies.DefaultDirectReply;
+                        this.HandleCommands(botClient, args.Message);
                     }
-
-                    // If the reply is not null then send it back.
-                    if (reply != null)
+                    else
                     {
-                        this.SendReply(botClient, args.Message, reply);
+                        this.HandleTextMessages(botClient, args.Message);
                     }
-
                     break;
             }
         }
@@ -77,7 +59,7 @@
             switch (reply.ReplyType)
             {
                 case ReplyType.Text:
-                    var textReply = (TextReply) reply;
+                    var textReply = (TextReply)reply;
                     botClient.SendTextMessageAsync(
                             chatId: message.Chat.Id,
                             text: textReply.Message,
@@ -85,7 +67,7 @@
                             parseMode: textReply.ParseMode);
                     break;
                 case ReplyType.Photo:
-                    var photoReply = (PhotoReply) reply;
+                    var photoReply = (PhotoReply)reply;
                     botClient.SendPhotoAsync(
                         chatId: message.Chat.Id,
                         photo: photoReply.FileToSend,
@@ -95,6 +77,46 @@
                 default:
                     Logger.Logger.WriteLogAsync("[EXCEPTION]: Invalid reply type encountered.");
                     break;
+            }
+        }
+
+        private void HandleCommands(TelegramBotClient botClient, Message message)
+        {
+            if (message.Text.StartsWith("/typical"))
+            {
+                TypicalCommandHandler.HandleTypicalCommand(botClient, message);
+            }
+        }
+
+        
+
+        private void HandleTextMessages(TelegramBotClient botClient, Message message)
+        {
+            // Check if it was a direction mention.
+            var isMentioned = message.Text.StartsWith("@thebulgarianbot");
+            var isPrivate = message.Chat.Type == ChatType.Private;
+
+            // Check whether the bot was directly addressed or if it was a normal message in the chat.
+            var reply = this.MatchReply(
+                isMentioned && !isPrivate
+                    ? Replies.DirectReplies
+                    : isPrivate
+                        ? Replies.RepliesList.Concat(Replies.DirectReplies).ToList()
+                        : Replies.RepliesList,
+                message.Text);
+
+            // Log the message if it was directly addressed to the bot and no reply was found.
+            // Send the default direct reply to the user.
+            if (reply == null && (isMentioned || isPrivate))
+            {
+                Logger.Logger.LogMessageAsync(message);
+                reply = Replies.DefaultDirectReply;
+            }
+
+            // If the reply is not null then send it back.
+            if (reply != null)
+            {
+                this.SendReply(botClient, message, reply);
             }
         }
 
@@ -110,7 +132,7 @@
         {
             var matchingReplies = replies.Where(r => r.ReplyTo.Any(m => m.IsMatch(messageText))).ToList();
 
-            return matchingReplies.Count > 0 
+            return matchingReplies.Count > 0
                 ? matchingReplies[OnMessageHandler.rand.Next(matchingReplies.Count)]
                 : null;
         }

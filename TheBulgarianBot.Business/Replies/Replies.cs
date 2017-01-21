@@ -137,7 +137,7 @@
                     message: "Ti pa si mnogo ubav!",
                     replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
                 new TextReply(
-                    message: "Maika ti te e sabirala s lajica ot poda :)",
+                    message: "Maika ti te e sabirala s lajica ot poda 😊",
                     replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
                 new PhotoReply(
                     fileName: "bulgaria.jpg",
@@ -162,20 +162,20 @@
                     message: "Q trai we, lainar!",
                     replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
                 new TextReply(
-                    message: "Na maika ti putkata :@",
+                    message: "Na maika ti putkata 😡",
                     replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
                 new TextReply(
                     message: "Neshtastnik",
                     replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
                 new TextReply(
-                    message: "Mn qsno che sh piem we :)",
+                    message: "Mn qsno che sh piem we 😊",
                     replyTo: new List<Regex>
                     {
                         new Regex(@"\bsh(te)? piem li\b", RegexOptions.IgnoreCase),
                         new Regex(@"\bще пием ли\b", RegexOptions.IgnoreCase)
                     }),
                 new TextReply(
-                    message: "Extra sam, bepce :)",
+                    message: "Extra sam, bepce 😊",
                     replyTo: new List<Regex>().Concat(Regexes.HowAreYouRegexes)),
                 new TextReply(
                     message: "Belq krastavicata",
@@ -184,7 +184,7 @@
                     message: "Tiho we, kurvo",
                     replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
                 new TextReply(
-                    message: "Maika ti e kuchka ;)",
+                    message: "Maika ti e kuchka 😉",
                     replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
                 new TextReply(
                     message: "Zdrasti",
@@ -193,14 +193,68 @@
                     message: "Zdravei",
                     replyTo: new List<Regex>().Concat(Regexes.HiRegexes)),
                 new TextReply(
-                    message: "Zdr :*",
+                    message: "Zdr 😘",
                     replyTo: new List<Regex>().Concat(Regexes.HiRegexes)),
                 new TextReply(
                     message: "Tapak",
                     replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
                 new TextReply(
                     message: "Da ti eba maikata, kopele",
-                    replyTo: new List<Regex>().Concat(Regexes.CurseRegexes))
+                    replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
+                new TextReply(
+                    message: "❤️",
+                    replyTo: new List<Regex>
+                    {
+                        new Regex(@"\braki(a|q)\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bракия\b", RegexOptions.IgnoreCase)
+                    }),
+                new TextReply(
+                    message: "@ivanmilchev",
+                    replyTo: new List<Regex>
+                    {
+                        new Regex(@"\bKoi (ti)? e ba(sh|6)ta\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bKoi te e? (napravil?|sazda(de|l))\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bКой (ти)? е баща\b"),
+                        new Regex(@"\bКой те е? (направил?|създа(де|л))\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bWho (made|created?)\b", RegexOptions.IgnoreCase),
+                    }),
+                new TextReply(
+                    message: "q nedei znai we, lainar",
+                    replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
+                new TextReply(
+                    message: "tuka mn znaesh ama navanka malchish kat parjena caca",
+                    replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
+                new TextReply(
+                    message: "are te fana 1v1 we",
+                    replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
+                new TextReply(
+                    message: "Aushwitz was such a wonderful place",
+                    replyTo: new List<Regex>().Concat(Regexes.BlackRegexes)),
+                new TextReply(
+                    message: "Real men drink only rakia",
+                    replyTo: new List<Regex>().Concat(Regexes.AlcoholRegexes)),
+                new TextReply(
+                    message: "ne si dorasal za da ocenish rakiata",
+                    replyTo: new List<Regex>().Concat(Regexes.AlcoholRegexes)),
+                new TextReply(
+                    message: "I'M ALIIIIIIIIIIVE",
+                    replyTo: new List<Regex>
+                    {
+                        new Regex(@"\bumr(q|ia)\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bумря\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bm(a|u)rtav\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bмъртъв\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bdead\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bri(p|b)\b", RegexOptions.IgnoreCase)
+                    }),
+                new TextReply(
+                    message: "I'm just a Bulgarian 😁",
+                    replyTo: new List<Regex>
+                    {
+                        new Regex(@"\b(ko(i|y)|k(ak)?vo)\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bкой си\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\b(who|what) are you\b", RegexOptions.IgnoreCase),
+                    }),
             };
         }
     }

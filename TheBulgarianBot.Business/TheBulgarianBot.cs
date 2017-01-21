@@ -11,7 +11,7 @@
         /// <summary>
         /// The access token for the bot.
         /// </summary>
-        private const string token = "181586297:AAG7-FzzSV08Vd7-ONOnARSZmt_off0GQh4";
+        private const string token = "302251638:AAF2FAcJomslmYVI_j6kTLEpyd5NjriNmyU";
 
         /// <summary>
         /// The bot client.
