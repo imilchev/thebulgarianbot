@@ -34,7 +34,7 @@
                 // Filter the profile pics by getting a random one from them and then getting it in a size
                 // bigger or equal than 320.
                 var profilePicsFilteredList = profilePics.Photos
-                    .SelectMany(x => x.Where(y => y.Width >= 320))
+                    .SelectMany(x => x.Where(y => y.Width >= 640))
                     .ToList();
 
                 // Get a random picture of that size.
