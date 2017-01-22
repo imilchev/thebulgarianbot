@@ -67,6 +67,8 @@
 
                     font = TypicalCommandHandler.GetFontSize(font, graphics, longerText, profilePic.Width);
 
+                    graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
                     // Add the string to the path.
                     topPath.AddString(
                         text.TopText, // text to draw

@@ -2114,7 +2114,7 @@
           "ref/netstandard1.3/System.Threading.ThreadPool.dll": {}
         },
         "runtime": {
-          "lib/netstandard1.3/_._": {}
+          "lib/netstandard1.3/System.Threading.ThreadPool.dll": {}
         }
       },
       "System.Threading.Timer/4.0.1": {
@@ -2291,6 +2291,7 @@
           "Microsoft.CSharp": "4.0.1",
           "NETStandard.Library": "1.6.0",
           "StyleCop.Analyzers": "1.0.0",
+          "System.Threading.ThreadPool": "4.0.10",
           "Telegram.Bot": "10.4.0"
         },
         "compile": {
@@ -4696,7 +4697,7 @@
           "ref/netstandard1.3/System.Threading.ThreadPool.dll": {}
         },
         "runtime": {
-          "lib/netstandard1.3/_._": {}
+          "lib/netstandard1.3/System.Threading.ThreadPool.dll": {}
         }
       },
       "System.Threading.Timer/4.0.1": {
@@ -4874,6 +4875,7 @@
           "Microsoft.CSharp": "4.0.1",
           "NETStandard.Library": "1.6.0",
           "StyleCop.Analyzers": "1.0.0",
+          "System.Threading.ThreadPool": "4.0.10",
           "Telegram.Bot": "10.4.0"
         },
         "compile": {
@@ -7288,7 +7290,7 @@
           "ref/netstandard1.3/System.Threading.ThreadPool.dll": {}
         },
         "runtime": {
-          "lib/netstandard1.3/_._": {}
+          "lib/netstandard1.3/System.Threading.ThreadPool.dll": {}
         }
       },
       "System.Threading.Timer/4.0.1": {
@@ -7466,6 +7468,7 @@
           "Microsoft.CSharp": "4.0.1",
           "NETStandard.Library": "1.6.0",
           "StyleCop.Analyzers": "1.0.0",
+          "System.Threading.ThreadPool": "4.0.10",
           "Telegram.Bot": "10.4.0"
         },
         "compile": {

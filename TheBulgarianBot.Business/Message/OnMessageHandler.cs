@@ -30,19 +30,20 @@
         /// </summary>
         /// <param name="client">The bot client raising the event.</param>
         /// <param name="args">The message event arguments.</param>
-        public void OnMessage(object client, MessageEventArgs args)
+        public void OnMessage(object data)
         {
-            var botClient = (TelegramBotClient)client;
-            switch (args.Message.Type)
+            var eventData = (EventData<MessageEventArgs>)data;
+            var botClient = (TelegramBotClient)eventData.Client;
+            switch (eventData.EventArgs.Message.Type)
             {
                 case MessageType.TextMessage:
-                    if (args.Message.Text.StartsWith("/"))
+                    if (eventData.EventArgs.Message.Text.StartsWith("/"))
                     {
-                        this.HandleCommands(botClient, args.Message);
+                        this.HandleCommands(botClient, eventData.EventArgs.Message);
                     }
                     else
                     {
-                        this.HandleTextMessages(botClient, args.Message);
+                        this.HandleTextMessages(botClient, eventData.EventArgs.Message);
                     }
                     break;
             }

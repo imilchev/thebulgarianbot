@@ -5,7 +5,8 @@
     "Microsoft.CSharp": "4.0.1",
     "StyleCop.Analyzers": "1.0.0",
     "Telegram.Bot": "10.4.0",
-    "CoreCompat.System.Drawing": "1.0.0-beta006"
+    "CoreCompat.System.Drawing": "1.0.0-beta006",
+    "System.Threading.ThreadPool": "4.0.10"
   },
   "frameworks": {
     "netstandard1.6": {

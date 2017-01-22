@@ -1,7 +1,9 @@
 ﻿namespace TheBulgarianBot.Business
 {
+    using System.Threading;
     using Message;
     using Telegram.Bot;
+    using Telegram.Bot.Args;
 
     /// <summary>
     /// The main entry point for the bot.
@@ -31,7 +33,7 @@
             this.botClient = new TelegramBotClient(token);
             this.onMessageHandler = new OnMessageHandler();
 
-            this.botClient.OnMessage += this.onMessageHandler.OnMessage;
+            this.botClient.OnMessage += this.OnMessage;
         }
 
         /// <summary>
@@ -48,6 +50,13 @@
         public void StopReceiving()
         {
             this.botClient.StopReceiving();
+        }
+
+        private void OnMessage(object client, MessageEventArgs args)
+        {
+            ThreadPool.QueueUserWorkItem(
+                this.onMessageHandler.OnMessage,
+                new EventData<MessageEventArgs>(client, args));
         }
     }
 }
