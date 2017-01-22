@@ -1,8 +1,7 @@
-﻿namespace TheBulgarianBot.Business.Replies
+﻿namespace TheBulgarianBot.Business.Message.Replies
 {
     using System.Collections.Generic;
     using System.Text.RegularExpressions;
-    using Telegram.Bot.Types.Enums;
 
     /// <summary>
     /// Base class for a reply to a message.
@@ -30,6 +29,6 @@
         /// Gets or sets a list of regular expressions to which the reply should be sent if they match with the message
         /// that was sent.
         /// </summary>
-        public IEnumerable<Regex> ReplyTo { get; set; } 
+        public IEnumerable<Regex> ReplyTo { get; set; }
     }
 }

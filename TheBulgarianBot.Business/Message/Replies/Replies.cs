@@ -1,4 +1,4 @@
-﻿namespace TheBulgarianBot.Business.Replies
+﻿namespace TheBulgarianBot.Business.Message.Replies
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -11,23 +11,7 @@
     internal static class Replies
     {
         /// <summary>
-        /// The default direct reply that will be sent whenever the user directly addresses the bot, but there is no
-        /// predefined reply.
-        /// </summary>
-        public static Reply DefaultDirectReply;
-
-        /// <summary>
-        /// The list with replies that are used for global chat messages.
-        /// </summary>
-        public static List<Reply> RepliesList;
-
-        /// <summary>
-        /// The list with replies that are used when the bot is addressed directly.
-        /// </summary>
-        public static List<Reply> DirectReplies;
-
-        /// <summary>
-        /// Initializes the static fields of the <see cref="Replies"/> class.
+        /// Initializes the static members of the <see cref="Replies"/> class.
         /// </summary>
         static Replies()
         {
@@ -257,5 +241,21 @@
                     }),
             };
         }
+
+        /// <summary>
+        /// Gets the default direct reply that will be sent whenever the user directly addresses the bot, but there is
+        /// no predefined reply.
+        /// </summary>
+        public static Reply DefaultDirectReply { get; }
+
+        /// <summary>
+        /// Gets the list with replies that are used for global chat messages.
+        /// </summary>
+        public static IReadOnlyList<Reply> RepliesList { get; }
+
+        /// <summary>
+        /// Gets the list with replies that are used when the bot is addressed directly.
+        /// </summary>
+        public static IReadOnlyList<Reply> DirectReplies { get; }
     }
 }

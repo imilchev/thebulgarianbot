@@ -52,11 +52,16 @@
             this.botClient.StopReceiving();
         }
 
+        /// <summary>
+        /// Handles the on message event. Distributes the messages to the handler by using a thread pool.
+        /// </summary>
+        /// <param name="client">The telegram bot client instance.</param>
+        /// <param name="args">The message event arguments.</param>
         private void OnMessage(object client, MessageEventArgs args)
         {
             ThreadPool.QueueUserWorkItem(
                 this.onMessageHandler.OnMessage,
-                new EventData<MessageEventArgs>(client, args));
+                new EventData<MessageEventArgs>((TelegramBotClient)client, args));
         }
     }
 }

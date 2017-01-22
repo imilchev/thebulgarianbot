@@ -1,4 +1,4 @@
-﻿namespace TheBulgarianBot.Business.Replies
+﻿namespace TheBulgarianBot.Business.Message.Replies
 {
     using System.Collections.Generic;
     using System.Text.RegularExpressions;
@@ -8,14 +8,8 @@
     /// </summary>
     internal static class Regexes
     {
-        public static List<Regex> CurseRegexes;
-        public static List<Regex> HowAreYouRegexes;
-        public static List<Regex> HiRegexes;
-        public static List<Regex> BlackRegexes;
-        public static List<Regex> AlcoholRegexes;
-
         /// <summary>
-        /// Initializes the static fields of the <see cref="Regexes"/> class.
+        /// Initializes the static members of the <see cref="Regexes"/> class.
         /// </summary>
         static Regexes()
         {
@@ -103,5 +97,30 @@
                 new Regex(@"\bром\b", RegexOptions.IgnoreCase),
             };
         }
+
+        /// <summary>
+        /// Gets the regexes that match curse words.
+        /// </summary>
+        public static IReadOnlyList<Regex> CurseRegexes { get; }
+
+        /// <summary>
+        /// Gets the regexes that match: "How are you?" type of questions.
+        /// </summary>
+        public static IReadOnlyList<Regex> HowAreYouRegexes { get; }
+
+        /// <summary>
+        /// Gets the regexes that match "Hi" and its variations.
+        /// </summary>
+        public static IReadOnlyList<Regex> HiRegexes { get; }
+
+        /// <summary>
+        /// Gets the regexes that trigger racism.
+        /// </summary>
+        public static IReadOnlyList<Regex> BlackRegexes { get; }
+
+        /// <summary>
+        /// Gets the regexes that match alcohol.
+        /// </summary>
+        public static IReadOnlyList<Regex> AlcoholRegexes { get; }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace TheBulgarianBot.Business.Replies
+﻿namespace TheBulgarianBot.Business.Message.Replies
 {
     /// <summary>
     /// An enumeration representing the different types of reply.

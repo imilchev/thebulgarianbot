@@ -2,13 +2,17 @@
 {
     using System.Collections.Generic;
 
-    public static class Text
+    /// <summary>
+    /// A static class containing the texts for the /typical command.
+    /// </summary>
+    public static class TypicalTexts
     {
-        public static List<TypicalText> typicalTexts;
-
-        static Text()
+        /// <summary>
+        /// Initializes the static members of the <see cref="TypicalTexts"/> class.
+        /// </summary>
+        static TypicalTexts()
         {
-            Text.typicalTexts = new List<TypicalText>
+            TypicalTexts.TypicalTextsList = new List<TypicalText>
             {
                 new TypicalText("КРУШКАТА В СТАЯТА МУ ИЗГОРИ", "СВИВА ТАЯ ОТ ХОЛА"),
                 new TypicalText("ЩЕ ПРАВИ ERASMUS", "ОТИВА В СОФИЙСКИ"),
@@ -53,5 +57,10 @@
                 new TypicalText("ВИКА ТИ: \"ГОТОВ СЪМ СЛЕД 5 МИН\"", "ЧАКАШ ГО 1 ЧАС"),
             };
         }
+
+        /// <summary>
+        /// A list containing the texts to be used for the /typical command.
+        /// </summary>
+        public static IReadOnlyList<TypicalText> TypicalTextsList { get; }
     }
 }

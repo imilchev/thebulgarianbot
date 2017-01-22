@@ -1,8 +1,8 @@
-﻿namespace TheBulgarianBot.Business.Replies
+﻿namespace TheBulgarianBot.Business.Message.Replies
 {
     using System.Collections.Generic;
     using System.Text.RegularExpressions;
-    using Resource;
+    using global::TheBulgarianBot.Business.Resource;
     using Telegram.Bot.Types;
 
     /// <summary>

@@ -1,4 +1,4 @@
-﻿namespace TheBulgarianBot.Business.Replies
+﻿namespace TheBulgarianBot.Business.Message.Replies
 {
     using System.Collections.Generic;
     using System.Text.RegularExpressions;

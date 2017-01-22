@@ -3,13 +3,16 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using global::TheBulgarianBot.Business.Replies;
+    using Replies;
     using Telegram.Bot;
     using Telegram.Bot.Args;
     using Telegram.Bot.Types;
     using Telegram.Bot.Types.Enums;
     using TypicalCommand;
 
+    /// <summary>
+    /// A class responsible for handling messages adressed to the bot.
+    /// </summary>
     internal class OnMessageHandler
     {
         /// <summary>
@@ -28,12 +31,11 @@
         /// <summary>
         /// Handles the message received event.
         /// </summary>
-        /// <param name="client">The bot client raising the event.</param>
-        /// <param name="args">The message event arguments.</param>
+        /// <param name="data">The event data.</param>
         public void OnMessage(object data)
         {
             var eventData = (EventData<MessageEventArgs>)data;
-            var botClient = (TelegramBotClient)eventData.Client;
+            var botClient = eventData.Client;
             switch (eventData.EventArgs.Message.Type)
             {
                 case MessageType.TextMessage:
@@ -45,6 +47,7 @@
                     {
                         this.HandleTextMessages(botClient, eventData.EventArgs.Message);
                     }
+
                     break;
             }
         }
@@ -81,6 +84,11 @@
             }
         }
 
+        /// <summary>
+        /// Handles the commands for the bot.
+        /// </summary>
+        /// <param name="botClient">The telegram bot client instance.</param>
+        /// <param name="message">The message containing the command.</param>
         private void HandleCommands(TelegramBotClient botClient, Message message)
         {
             if (message.Text.StartsWith("/typical"))
@@ -89,8 +97,11 @@
             }
         }
 
-        
-
+        /// <summary>
+        /// Handles the text messages addressed to the bot.
+        /// </summary>
+        /// <param name="botClient">The telegram bot client.</param>
+        /// <param name="message">The message addressed to the bot.</param>
         private void HandleTextMessages(TelegramBotClient botClient, Message message)
         {
             // Check if it was a direction mention.
@@ -100,10 +111,10 @@
             // Check whether the bot was directly addressed or if it was a normal message in the chat.
             var reply = this.MatchReply(
                 isMentioned && !isPrivate
-                    ? Replies.DirectReplies
+                    ? Replies.Replies.DirectReplies
                     : isPrivate
-                        ? Replies.RepliesList.Concat(Replies.DirectReplies).ToList()
-                        : Replies.RepliesList,
+                        ? Replies.Replies.RepliesList.Concat(Replies.Replies.DirectReplies).ToList()
+                        : Replies.Replies.RepliesList,
                 message.Text);
 
             // Log the message if it was directly addressed to the bot and no reply was found.
@@ -111,7 +122,7 @@
             if (reply == null && (isMentioned || isPrivate))
             {
                 Logger.Logger.LogMessageAsync(message);
-                reply = Replies.DefaultDirectReply;
+                reply = Replies.Replies.DefaultDirectReply;
             }
 
             // If the reply is not null then send it back.
@@ -129,7 +140,7 @@
         /// <param name="messageText">The text of the message that was received.</param>
         /// <returns>The corresponding reply if one was found or a random one if many matches. Null if no reply was
         /// found.</returns>
-        private Reply MatchReply(List<Reply> replies, string messageText)
+        private Reply MatchReply(IReadOnlyList<Reply> replies, string messageText)
         {
             var matchingReplies = replies.Where(r => r.ReplyTo.Any(m => m.IsMatch(messageText))).ToList();
 
