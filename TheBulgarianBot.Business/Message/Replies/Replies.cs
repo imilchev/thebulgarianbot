@@ -206,6 +206,15 @@
                     message: "q nedei znai we, lainar",
                     replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
                 new TextReply(
+                    message: "да го хлопна на майка ти на челото",
+                    replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
+                new TextReply(
+                    message: "баща ти ако знаеше къв боклук ще стане от теб, щеше да свърши в мивката",
+                    replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
+                new TextReply(
+                    message: "майка ти е съжалила че не те е глътнала като си се родил",
+                    replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
+                new TextReply(
                     message: "tuka mn znaesh ama navanka malchish kat parjena caca",
                     replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
                 new TextReply(
@@ -238,6 +247,22 @@
                         new Regex(@"\b(ko(i|y)|k(ak)?vo)\b", RegexOptions.IgnoreCase),
                         new Regex(@"\bкой си\b", RegexOptions.IgnoreCase),
                         new Regex(@"\b(who|what) are you\b", RegexOptions.IgnoreCase),
+                    }),
+                new TextReply(
+                    message: "Задавам!",
+                    replyTo: new List<Regex>
+                    {
+                        new Regex(@"\bdai m(u|y)\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bдай му\b", RegexOptions.IgnoreCase),
+                    }),
+                new TextReply(
+                    message: "Пръскаммм!",
+                    replyTo: new List<Regex>
+                    {
+                        new Regex(@"\bнапрао ги убивам\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bнаправо ги убивам\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bnaprao gi ubivam\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bnapravo gi ubivam\b", RegexOptions.IgnoreCase),
                     }),
             };
         }

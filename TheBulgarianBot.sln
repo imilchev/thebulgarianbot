@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "TheBulgarianBot.Business", "TheBulgarianBot.Business\TheBulgarianBot.Business.xproj", "{5F8A3DB3-4C2E-4AE3-88E6-63D26C28CE0E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheBulgarianBot.Business", "TheBulgarianBot.Business\TheBulgarianBot.Business.csproj", "{5F8A3DB3-4C2E-4AE3-88E6-63D26C28CE0E}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "TheBulgarianBot.Application", "TheBulgarianBot.Application\TheBulgarianBot.Application.xproj", "{E6BAEE93-6AAC-4B78-8549-602E70425061}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheBulgarianBot.Application", "TheBulgarianBot.Application\TheBulgarianBot.Application.csproj", "{E6BAEE93-6AAC-4B78-8549-602E70425061}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

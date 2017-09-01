@@ -50,7 +50,11 @@
                 new Regex(@"\blainar\b", RegexOptions.IgnoreCase),
                 new Regex(@"\bлайнар\b", RegexOptions.IgnoreCase),
                 new Regex(@"\bprostak\b", RegexOptions.IgnoreCase),
-                new Regex(@"\bпростак\b", RegexOptions.IgnoreCase)
+                new Regex(@"\bпростак\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bху(й|я)\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bкурв(а|о)\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bгъз\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bпедофил\b", RegexOptions.IgnoreCase)
             };
             Regexes.HowAreYouRegexes = new List<Regex>
             {
@@ -85,6 +89,8 @@
                 new Regex(@"\bjews?\b", RegexOptions.IgnoreCase),
                 new Regex(@"\bevrein?\b", RegexOptions.IgnoreCase),
                 new Regex(@"\bевреин?\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bнегър?\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bвъглен?\b", RegexOptions.IgnoreCase),
             };
             Regexes.AlcoholRegexes = new List<Regex>
             {

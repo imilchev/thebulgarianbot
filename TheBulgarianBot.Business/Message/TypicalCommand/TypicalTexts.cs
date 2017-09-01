@@ -8,7 +8,7 @@
     public static class TypicalTexts
     {
         /// <summary>
-        /// Initializes the static members of the <see cref="TypicalTexts"/> class.
+        /// Initializes static members of the <see cref="TypicalTexts"/> class.
         /// </summary>
         static TypicalTexts()
         {
@@ -58,6 +58,19 @@
                 new TypicalText("ИДЕ НА ФИТНЕС", "\"БРАТ, АЗ 1 ДЮНЕР ЩЕ ХАПНА, ЗА МАСА\""),
                 new TypicalText("ПОЛЗВА НЕТА НА СЪСЕДА", "ПСУВА ГО ЧЕ БИЛ СЛАБ"),
                 new TypicalText("ПИШАТ МУ 2-КА", "\"ЕВРОФУТБОЛА ДА ИЗЛЕЗЕ ПЪК ДРУГОТО ГО ЗАЕБИ\""),
+                new TypicalText("УЧИ ПРАВО", "ОСЪДЕН НА 3 ГОДИНИ"),
+                new TypicalText("КАЖЕШ МУ ЧЕ ИМАШ СЕСТРА", "ПИТА НА КОЛКО ГОДИНИ Е"),
+                new TypicalText("ОБЕЩАЕ ТИ ДА СТАНЕ В 7 СУТРИНТА", "СПИ ДО 12 НА ОБЯД"),
+                new TypicalText("ЗАСИЛИЛ СЕ ДА ГЛАСУВА ЗА МАРЕШКИ", "СЕТИЛ СЕ, ЧЕ Е С ГАЗОВА УРЕДБА"),
+                new TypicalText("ВЛИЗА ТЕЖКО В МАГАЗИНА", "ВЗЕМЕ СИ 3 ЦИГАРИ НА ДРЕБНО"),
+                new TypicalText("КУПИЛ СИ ТЕЛЕВИЗОР ЗА 2 БОНА", "УВИЛ ДИСТАНЦИОННОТО В НАЙЛОНЧЕ"),
+                new TypicalText("ВЗЕМЕ МОМИЧЕ ОТ ДАЛЕЧЕН КВАРТАЛ", "НАСТОЯВА ЗА СВИРКА, ГОРИВОТО Е СКЪПО"),
+                new TypicalText("КАЧИ СЕ В ПЪЛЕН АСАНСЬОР", "ИЗПЪРДИ СЕ КАТО СЛИЗА"),
+                new TypicalText("ОТИВА НА КИНО", "НОСИ СИ СЕМКИ ОТ ТЯХ"),
+                new TypicalText("СПИРА НА БЕНЗИНОСТАНЦИЯ С S КЛАСА", "ВИКА: \"СИПИ ЗА 15ЛВ ГАЗ\""),
+                new TypicalText("ОПЛАКВА СЕ ОТ РАБОТАТА", "ЦЯЛ ДЕН ПИЕ КАФЕ И ЛАФИ ПО ФЕЙСА"),
+                new TypicalText("КАЧИ СЕ В ПЪЛЕН АСАНСЬОР", "ИЗПЪРДИ СЕ КАТО СЛИЗА"),
+                new TypicalText("ПРАВИ КАРДИО 10 МИНУТИ", "\"ВЕЧЕ МОГА ДА ХАПНА ЕДИН КАПСАЛОН\""),
             };
         }
 
