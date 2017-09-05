@@ -13,6 +13,11 @@
         /// <summary>
         /// The reply contains a photo.
         /// </summary>
-        Photo = 1
+        Photo = 1,
+
+        /// <summary>
+        /// The reply contains a sticker.
+        /// </summary>
+        Sticker = 2,
     }
 }

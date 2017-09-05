@@ -64,8 +64,20 @@
                     parseMode: ParseMode.Markdown),
                 new PhotoReply(
                     fileName: "hitler.jpg",
-                    replyTo: new List<Regex>().Concat(Regexes.BlackRegexes),
-                    caption: null)
+                    replyTo: new List<Regex>().Concat(Regexes.BlackRegexes)),
+                new StickerReply(
+                    fileId: "CAADBAADiQAD6l5iBGTArnOBcFBlAg",
+                    replyTo: new List<Regex>
+                    {
+                        new Regex(@"\bkifla\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bкифла\b", RegexOptions.IgnoreCase),
+                    }),
+                new TextReply(
+                    message: "Кифла си!",
+                    replyTo: new List<Regex>
+                    {
+                        new Regex(@"\bне съм кифла\b", RegexOptions.IgnoreCase)
+                    }),
             };
 
             // Direct replies.
@@ -238,7 +250,8 @@
                         new Regex(@"\bm(a|u)rtav\b", RegexOptions.IgnoreCase),
                         new Regex(@"\bмъртъв\b", RegexOptions.IgnoreCase),
                         new Regex(@"\bdead\b", RegexOptions.IgnoreCase),
-                        new Regex(@"\bri(p|b)\b", RegexOptions.IgnoreCase)
+                        new Regex(@"\bri(p|b)\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bжив ли си\b", RegexOptions.IgnoreCase)
                     }),
                 new TextReply(
                     message: "I'm just a Bulgarian 😁",
@@ -263,6 +276,15 @@
                         new Regex(@"\bнаправо ги убивам\b", RegexOptions.IgnoreCase),
                         new Regex(@"\bnaprao gi ubivam\b", RegexOptions.IgnoreCase),
                         new Regex(@"\bnapravo gi ubivam\b", RegexOptions.IgnoreCase),
+                    }),
+                new StickerReply(
+                    fileId: "CAADBAADiQAD6l5iBGTArnOBcFBlAg",
+                    replyTo: new List<Regex>
+                    {
+                        new Regex(@"\bКакв(о|а) е Зори\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bКакв(о|а) е Зорница\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bKakv(o|a) e zori\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bKakv(o|a) e zornica\b", RegexOptions.IgnoreCase),
                     }),
             };
         }

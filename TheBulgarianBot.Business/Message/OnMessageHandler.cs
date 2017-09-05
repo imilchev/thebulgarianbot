@@ -60,6 +60,8 @@
         /// <param name="reply">The reply to be sent.</param>
         private void SendReply(TelegramBotClient botClient, Message message, Reply reply)
         {
+            var replyToMessageId = message.Chat.Type == ChatType.Private ? 0 : message.MessageId;
+
             switch (reply.ReplyType)
             {
                 case ReplyType.Text:
@@ -67,7 +69,7 @@
                     botClient.SendTextMessageAsync(
                             chatId: message.Chat.Id,
                             text: textReply.Message,
-                            replyToMessageId: message.Chat.Type == ChatType.Private ? 0 : message.MessageId,
+                            replyToMessageId: replyToMessageId,
                             parseMode: textReply.ParseMode);
                     break;
                 case ReplyType.Photo:
@@ -76,7 +78,14 @@
                         chatId: message.Chat.Id,
                         photo: photoReply.FileToSend,
                         caption: photoReply.Caption,
-                        replyToMessageId: message.Chat.Type == ChatType.Private ? 0 : message.MessageId);
+                        replyToMessageId: replyToMessageId);
+                    break;
+                case ReplyType.Sticker:
+                    var stickerReply = (StickerReply)reply;
+                    botClient.SendStickerAsync(
+                        chatId: message.Chat.Id,
+                        sticker: new FileToSend("CAADBAADiQAD6l5iBGTArnOBcFBlAg"),
+                        replyToMessageId: replyToMessageId);
                     break;
                 default:
                     Logger.Logger.WriteLogAsync("[EXCEPTION]: Invalid reply type encountered.");
