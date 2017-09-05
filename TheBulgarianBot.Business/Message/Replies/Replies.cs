@@ -78,6 +78,33 @@
                     {
                         new Regex(@"\bне съм кифла\b", RegexOptions.IgnoreCase)
                     }),
+                new TextReply(
+                    message: "Пръскаммм!",
+                    replyTo: new List<Regex>
+                    {
+                        new Regex(@"\bнапрао ги убивам\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bнаправо ги убивам\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bnaprao gi ubivam\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bnapravo gi ubivam\b", RegexOptions.IgnoreCase),
+                    }),
+                new TextReply(
+                    message: "Заграждаййй, тигре!",
+                    replyTo: new List<Regex>
+                    {
+                        new Regex(@"\bдай му\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bdai m(u|y)\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bзадай\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bzadai\b", RegexOptions.IgnoreCase),
+                    }),
+                new TextReply(
+                    message: "Пъхай уе!",
+                    replyTo: new List<Regex>
+                    {
+                        new Regex(@"\bдай му\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bdai m(u|y)\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bзадай\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bzadai\b", RegexOptions.IgnoreCase),
+                    }),
             };
 
             // Direct replies.
@@ -267,15 +294,6 @@
                     {
                         new Regex(@"\bdai m(u|y)\b", RegexOptions.IgnoreCase),
                         new Regex(@"\bдай му\b", RegexOptions.IgnoreCase),
-                    }),
-                new TextReply(
-                    message: "Пръскаммм!",
-                    replyTo: new List<Regex>
-                    {
-                        new Regex(@"\bнапрао ги убивам\b", RegexOptions.IgnoreCase),
-                        new Regex(@"\bнаправо ги убивам\b", RegexOptions.IgnoreCase),
-                        new Regex(@"\bnaprao gi ubivam\b", RegexOptions.IgnoreCase),
-                        new Regex(@"\bnapravo gi ubivam\b", RegexOptions.IgnoreCase),
                     }),
                 new StickerReply(
                     fileId: "CAADBAADiQAD6l5iBGTArnOBcFBlAg",
