@@ -105,6 +105,15 @@
                         new Regex(@"\bзадай\b", RegexOptions.IgnoreCase),
                         new Regex(@"\bzadai\b", RegexOptions.IgnoreCase),
                     }),
+                new TextReply(
+                    message: "В ГЪЗЪЪЪ",
+                    replyTo: new List<Regex>
+                    {
+                        new Regex(@"\bпатенце\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bмиличък\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bpatence\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bmilich(u|a)k\b", RegexOptions.IgnoreCase),
+                    }),
             };
 
             // Direct replies.
