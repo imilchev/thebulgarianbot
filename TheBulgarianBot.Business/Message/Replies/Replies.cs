@@ -114,6 +114,30 @@
                         new Regex(@"\bpatence\b", RegexOptions.IgnoreCase),
                         new Regex(@"\bmilich(u|a)k\b", RegexOptions.IgnoreCase),
                     }),
+                new TextReply(
+                    message: "Наздраве",
+                    replyTo: new List<Regex>
+                    {
+                        new Regex(@"\bназдраве\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bnazdrave\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bcheers\b", RegexOptions.IgnoreCase),
+                    }),
+                new TextReply(
+                    message: "Удрииии",
+                    replyTo: new List<Regex>
+                    {
+                        new Regex(@"\bназдраве\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bnazdrave\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bcheers\b", RegexOptions.IgnoreCase),
+                    }),
+                new TextReply(
+                    message: "Наливаййййй!",
+                    replyTo: new List<Regex>
+                    {
+                        new Regex(@"\bназдраве\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bnazdrave\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bcheers\b", RegexOptions.IgnoreCase),
+                    }),
             };
 
             // Direct replies.
