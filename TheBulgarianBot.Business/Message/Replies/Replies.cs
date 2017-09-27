@@ -150,7 +150,7 @@
                         new Regex(@"\bWhen (should|must) \w+ drink\b", RegexOptions.IgnoreCase)
                     }),
                 new TextReply(
-                    message: "Po vsqko vreme!",
+                    message: "По всяко време!",
                     replyTo: new List<Regex>
                     {
                         new Regex(@"\bKoga (triabva|trqbva) da (pia|piq)\b", RegexOptions.IgnoreCase),
@@ -240,13 +240,13 @@
                     message: "Tiho we, kurvo",
                     replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
                 new TextReply(
-                    message: "Maika ti e kuchka 😉",
+                    message: "Майка ти е кучка 😉",
                     replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
                 new TextReply(
-                    message: "Zdrasti",
+                    message: "Здрасти",
                     replyTo: new List<Regex>().Concat(Regexes.HiRegexes)),
                 new TextReply(
-                    message: "Zdravei",
+                    message: "Здравей",
                     replyTo: new List<Regex>().Concat(Regexes.HiRegexes)),
                 new TextReply(
                     message: "Zdr 😘",
@@ -255,7 +255,7 @@
                     message: "Tapak",
                     replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
                 new TextReply(
-                    message: "Da ti eba maikata, kopele",
+                    message: "Да ти еба майката, копеле!",
                     replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
                 new TextReply(
                     message: "❤️",
@@ -336,6 +336,15 @@
                         new Regex(@"\bКакв(о|а) е Зорница\b", RegexOptions.IgnoreCase),
                         new Regex(@"\bKakv(o|a) e zori\b", RegexOptions.IgnoreCase),
                         new Regex(@"\bKakv(o|a) e zornica\b", RegexOptions.IgnoreCase),
+                    }),
+                new TextReply(
+                    message: "Не си ти човекът, който ще ми задава наклон на хуя!",
+                    replyTo: new List<Regex>
+                    {
+                        new Regex(@"\bмлъквай\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bмълчи\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bml(a|u)kvai\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bm(a|u)lchi\b", RegexOptions.IgnoreCase),
                     }),
             };
         }

@@ -54,7 +54,10 @@
                 new Regex(@"\bху(й|я)\b", RegexOptions.IgnoreCase),
                 new Regex(@"\bкурв(а|о)\b", RegexOptions.IgnoreCase),
                 new Regex(@"\bгъз\b", RegexOptions.IgnoreCase),
-                new Regex(@"\bпедофил\b", RegexOptions.IgnoreCase)
+                new Regex(@"\bпедофил\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bмиризливец\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bдупе\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bдупенце\b", RegexOptions.IgnoreCase),
             };
             Regexes.HowAreYouRegexes = new List<Regex>
             {
