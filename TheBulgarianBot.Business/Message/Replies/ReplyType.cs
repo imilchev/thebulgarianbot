@@ -19,5 +19,10 @@
         /// The reply contains a sticker.
         /// </summary>
         Sticker = 2,
+
+        /// <summary>
+        /// The reply contains text but needs a usersname specified.
+        /// </summary>
+        Mention = 3,
     }
 }

@@ -20,7 +20,7 @@
         private static readonly Random rand;
 
         /// <summary>
-        /// Initializes the static members of the <see cref="OnMessageHandler"/> class.
+        /// Initializes static members of the <see cref="TypicalCommandHandler"/> class.
         /// </summary>
         static TypicalCommandHandler()
         {

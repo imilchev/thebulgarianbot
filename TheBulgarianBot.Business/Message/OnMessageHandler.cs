@@ -21,7 +21,7 @@
         private static readonly Random rand;
 
         /// <summary>
-        /// Initializes the static fields of the <see cref="OnMessageHandler"/> class.
+        /// Initializes static members of the <see cref="OnMessageHandler"/> class.
         /// </summary>
         static OnMessageHandler()
         {
@@ -84,8 +84,19 @@
                     var stickerReply = (StickerReply)reply;
                     botClient.SendStickerAsync(
                         chatId: message.Chat.Id,
-                        sticker: new FileToSend("CAADBAADiQAD6l5iBGTArnOBcFBlAg"),
+                        sticker: stickerReply.Sticker,
                         replyToMessageId: replyToMessageId);
+                    break;
+                case ReplyType.Mention:
+                    var mentionReply = (MentionReply)reply;
+                    var user = message.Text.Split(' ')
+                        .Where(x => !x.Equals("@thebulgarianbot", StringComparison.OrdinalIgnoreCase))
+                        .First(x => x.StartsWith("@"));
+
+                    botClient.SendTextMessageAsync(
+                        chatId: message.Chat.Id,
+                        text: mentionReply.GetMessage(user),
+                        parseMode: mentionReply.ParseMode);
                     break;
                 default:
                     Logger.Logger.WriteLogAsync("[EXCEPTION]: Invalid reply type encountered.");
@@ -117,27 +128,46 @@
             var isMentioned = message.Text.StartsWith("@thebulgarianbot");
             var isPrivate = message.Chat.Type == ChatType.Private;
 
-            // Check whether the bot was directly addressed or if it was a normal message in the chat.
-            var reply = this.MatchReply(
-                isMentioned && !isPrivate
-                    ? Replies.Replies.DirectReplies
-                    : isPrivate
-                        ? Replies.Replies.RepliesList.Concat(Replies.Replies.DirectReplies).ToList()
-                        : Replies.Replies.RepliesList,
-                message.Text);
-
-            // Log the message if it was directly addressed to the bot and no reply was found.
-            // Send the default direct reply to the user.
-            if (reply == null && (isMentioned || isPrivate))
+            if (Regexes.CurseOrderRegexes.Any(r => r.IsMatch(message.Text)))
             {
-                Logger.Logger.LogMessageAsync(message);
-                reply = Replies.Replies.DefaultDirectReply;
+                if (message.From.Username == "ivanmilchev")
+                {
+                    var matchingReplies = Replies.Replies.MentionReplies.ToList();
+
+                    this.SendReply(
+                        botClient,
+                        message,
+                        matchingReplies[OnMessageHandler.rand.Next(matchingReplies.Count)]);
+                }
+                else
+                {
+                    this.SendReply(botClient, message, Replies.Replies.DefaultCurseOrderReply);
+                }
             }
-
-            // If the reply is not null then send it back.
-            if (reply != null)
+            else
             {
-                this.SendReply(botClient, message, reply);
+                // Check whether the bot was directly addressed or if it was a normal message in the chat.
+                var reply = this.MatchReply(
+                    isMentioned && !isPrivate
+                        ? Replies.Replies.DirectReplies
+                        : isPrivate
+                            ? Replies.Replies.RepliesList.Concat(Replies.Replies.DirectReplies).ToList()
+                            : Replies.Replies.RepliesList,
+                    message.Text);
+
+                // Log the message if it was directly addressed to the bot and no reply was found.
+                // Send the default direct reply to the user.
+                if (reply == null && (isMentioned || isPrivate))
+                {
+                    Logger.Logger.LogMessageAsync(message);
+                    reply = Replies.Replies.DefaultDirectReply;
+                }
+
+                // If the reply is not null then send it back.
+                if (reply != null)
+                {
+                    this.SendReply(botClient, message, reply);
+                }
             }
         }
 

@@ -9,10 +9,22 @@
     internal static class Regexes
     {
         /// <summary>
-        /// Initializes the static members of the <see cref="Regexes"/> class.
+        /// Initializes static members of the <see cref="Regexes"/> class.
         /// </summary>
         static Regexes()
         {
+            Regexes.CurseOrderRegexes = new List<Regex>
+            {
+                new Regex(@"\bнахрани @\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bnahrani @\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bхрани @\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bhrani @", RegexOptions.IgnoreCase),
+                new Regex(@"\bсипи на @", RegexOptions.IgnoreCase),
+                new Regex(@"\bsipi na @", RegexOptions.IgnoreCase),
+                new Regex(@"\bсложи на @", RegexOptions.IgnoreCase),
+                new Regex(@"\bsloji na @", RegexOptions.IgnoreCase),
+            };
+
             Regexes.CurseRegexes = new List<Regex>
             {
                 new Regex(@"\bmainata ti\b", RegexOptions.IgnoreCase),
@@ -106,6 +118,11 @@
                 new Regex(@"\bром\b", RegexOptions.IgnoreCase),
             };
         }
+
+        /// <summary>
+        /// Gets the regexes that would order the bot to curse at someone.
+        /// </summary>
+        public static IReadOnlyList<Regex> CurseOrderRegexes { get; }
 
         /// <summary>
         /// Gets the regexes that match curse words.

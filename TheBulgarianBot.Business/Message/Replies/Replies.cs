@@ -10,14 +10,59 @@
     /// </summary>
     internal static class Replies
     {
+        private static IReadOnlyList<string> curses;
+
         /// <summary>
-        /// Initializes the static members of the <see cref="Replies"/> class.
+        /// Initializes static members of the <see cref="Replies"/> class.
         /// </summary>
         static Replies()
         {
+            Replies.curses = new List<string>
+            {
+                "Майка ти те е събирала с лъжица от пода 😊",
+                "Ти па си много убав!",
+                "Еби си майката!",
+                "Гол да го бараш!",
+                "Да го духаш, педал!",
+                "Майната ти!",
+                "аре те хвана 1в1 уе",
+                "тука мн знаеш ама навънка мълчиш кат пържена цаца",
+                "майка ти е съжалила че не те е глътнала като си се родил",
+                "баща ти ако знаеше къв боклук ще стане от теб, щеше да свърши в мивката",
+                "да го хлопна на майка ти на челото",
+                "я недей знай уе, лайнар",
+                "Ти па си много убав!",
+                "На майка ти путката",
+                "Майка ти те е събирала с лъжица от пода 😊",
+                "Еби си майката!",
+                "Гол да го бараш!",
+                "Да го духаш, педал!",
+                "Майната ти!",
+                "Нисхогъзест пърхопърдел",
+                "Ако не занеш как се правят грозни деца-ПОПИТАЙ МАЙКА СИ!!!",
+                "Отивай да ебеш мисирките на село!",
+                "Задника ти е дебел като боилер бе, бидон разпльокан!",
+                "Да лапаш задопашна жлеза на южно-американски скункс!",
+                "Я се погледни че приличаш на млековарка на горнобански път бре!!!!!!",
+                "Като те гледам какъв си се сещам, че понякога природата е много жестока.",
+                "Родилен продукт на гадна, фригидна, беззъба пъпчива вешица с космати крака!!!",
+                "Изчезни кат` падаща мазилка уе...",
+                "Може да си грозен, но пък за сметка на това си тъп.",
+                "Толкова си грозен, че майкати сигурно те е хранила с прашка?!",
+                "Ей овцо миризлива , да се мъчиш на мек хуй.",
+                "Кон да ебе cеcтра ти на гроба на майка ти, докато бащта ти гледа падайки от cамолет",
+                "Триста метра бодлива тел да изсереш!",
+                "Миньор да търси злато в гъза ти!"
+            };
+
             // Default direct reply.
             Replies.DefaultDirectReply = new TextReply(
                 message: "WTF are you talking about, kopele?",
+                replyTo: new List<Regex>());
+
+            // Default curse order reply.
+            Replies.DefaultCurseOrderReply = new TextReply(
+                message: "Я не ми задавай наклон на хуя!",
                 replyTo: new List<Regex>());
 
             // Replies list.
@@ -72,6 +117,13 @@
                         new Regex(@"\bkifla\b", RegexOptions.IgnoreCase),
                         new Regex(@"\bкифла\b", RegexOptions.IgnoreCase),
                     }),
+                new StickerReply(
+                    fileId: "CAADBAADjQAD6l5iBGBZ8bpO8yHZAg",
+                    replyTo: new List<Regex>
+                    {
+                        new Regex(@"\bчехъл\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bchehal\b", RegexOptions.IgnoreCase),
+                    }),
                 new TextReply(
                     message: "Кифла си!",
                     replyTo: new List<Regex>
@@ -106,7 +158,7 @@
                         new Regex(@"\bzadai\b", RegexOptions.IgnoreCase),
                     }),
                 new TextReply(
-                    message: "В ГЪЗЪЪЪ",
+                    message: "В ГAЗЪЪЪ",
                     replyTo: new List<Regex>
                     {
                         new Regex(@"\bпатенце\b", RegexOptions.IgnoreCase),
@@ -177,24 +229,6 @@
                         new Regex(@"\bK(ak)?vo (sh(te)?)? piem\b", RegexOptions.IgnoreCase),
                         new Regex(@"\bК(ак)?во (ще)? пием\b", RegexOptions.IgnoreCase)
                     }),
-                new TextReply(
-                    message: "Mainata ti!",
-                    replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
-                new TextReply(
-                    message: "Da go duhash, pedal!",
-                    replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
-                new TextReply(
-                    message: "Gol da go barash!",
-                    replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
-                new TextReply(
-                    message: "Ebi si maikata!",
-                    replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
-                new TextReply(
-                    message: "Ti pa si mnogo ubav!",
-                    replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
-                new TextReply(
-                    message: "Maika ti te e sabirala s lajica ot poda 😊",
-                    replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
                 new PhotoReply(
                     fileName: "bulgaria.jpg",
                     replyTo: new List<Regex>
@@ -215,15 +249,6 @@
                         new Regex(@"\bпедал\b", RegexOptions.IgnoreCase),
                     }),
                 new TextReply(
-                    message: "Q trai we, lainar!",
-                    replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
-                new TextReply(
-                    message: "Na maika ti putkata 😡",
-                    replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
-                new TextReply(
-                    message: "Neshtastnik",
-                    replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
-                new TextReply(
                     message: "Mn qsno che sh piem we 😊",
                     replyTo: new List<Regex>
                     {
@@ -234,11 +259,8 @@
                     message: "Extra sam, bepce 😊",
                     replyTo: new List<Regex>().Concat(Regexes.HowAreYouRegexes)),
                 new TextReply(
-                    message: "Belq krastavicata",
+                    message: "Беля краставицата",
                     replyTo: new List<Regex>().Concat(Regexes.HowAreYouRegexes)),
-                new TextReply(
-                    message: "Tiho we, kurvo",
-                    replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
                 new TextReply(
                     message: "Майка ти е кучка 😉",
                     replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
@@ -249,11 +271,8 @@
                     message: "Здравей",
                     replyTo: new List<Regex>().Concat(Regexes.HiRegexes)),
                 new TextReply(
-                    message: "Zdr 😘",
+                    message: "Здр 😘",
                     replyTo: new List<Regex>().Concat(Regexes.HiRegexes)),
-                new TextReply(
-                    message: "Tapak",
-                    replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
                 new TextReply(
                     message: "Да ти еба майката, копеле!",
                     replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
@@ -274,24 +293,6 @@
                         new Regex(@"\bКой те е? (направил?|създа(де|л))\b", RegexOptions.IgnoreCase),
                         new Regex(@"\bWho (made|created?)\b", RegexOptions.IgnoreCase),
                     }),
-                new TextReply(
-                    message: "q nedei znai we, lainar",
-                    replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
-                new TextReply(
-                    message: "да го хлопна на майка ти на челото",
-                    replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
-                new TextReply(
-                    message: "баща ти ако знаеше къв боклук ще стане от теб, щеше да свърши в мивката",
-                    replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
-                new TextReply(
-                    message: "майка ти е съжалила че не те е глътнала като си се родил",
-                    replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
-                new TextReply(
-                    message: "tuka mn znaesh ama navanka malchish kat parjena caca",
-                    replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
-                new TextReply(
-                    message: "are te fana 1v1 we",
-                    replyTo: new List<Regex>().Concat(Regexes.CurseRegexes)),
                 new TextReply(
                     message: "Aushwitz was such a wonderful place",
                     replyTo: new List<Regex>().Concat(Regexes.BlackRegexes)),
@@ -347,6 +348,17 @@
                         new Regex(@"\bm(a|u)lchi\b", RegexOptions.IgnoreCase),
                     }),
             };
+
+            Replies.DirectReplies = Replies.DirectReplies.Concat(
+                    Replies.curses.Select(
+                        x => new TextReply(
+                            message: x,
+                            replyTo: new List<Regex>().Concat(Regexes.CurseRegexes).ToList())))
+                .ToList();
+
+            // Mention replies.
+            Replies.MentionReplies = Replies.curses.Select(
+                x => new MentionReply(message: x, replyTo: new List<Regex>().Concat(Regexes.CurseRegexes))).ToList();
         }
 
         /// <summary>
@@ -354,6 +366,12 @@
         /// no predefined reply.
         /// </summary>
         public static Reply DefaultDirectReply { get; }
+
+        /// <summary>
+        /// Gets the default curse order reply that will be sent whenever a user different from @ivanmilchev orders the
+        /// bot to curse.
+        /// </summary>
+        public static Reply DefaultCurseOrderReply { get; }
 
         /// <summary>
         /// Gets the list with replies that are used for global chat messages.
@@ -364,5 +382,10 @@
         /// Gets the list with replies that are used when the bot is addressed directly.
         /// </summary>
         public static IReadOnlyList<Reply> DirectReplies { get; }
+
+        /// <summary>
+        /// Gets the list with replies that are used for mentioning users.
+        /// </summary>
+        public static IReadOnlyList<MentionReply> MentionReplies { get; }
     }
 }
