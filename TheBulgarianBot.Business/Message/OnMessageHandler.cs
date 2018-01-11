@@ -89,9 +89,16 @@
                     break;
                 case ReplyType.Mention:
                     var mentionReply = (MentionReply)reply;
-                    var user = message.Text.Split(' ')
-                        .Where(x => !x.Equals("@thebulgarianbot", StringComparison.OrdinalIgnoreCase))
-                        .First(x => x.StartsWith("@"));
+                    var text = message.Text;
+
+                    // If the message starts with the name of the bot, then remove it, so it is not parsed.
+                    if (text.StartsWith("@thebulgarianbot"))
+                    {
+                        var i = text.IndexOf(" ", StringComparison.OrdinalIgnoreCase) + 1;
+                        text = text.Substring(i);
+                    }
+
+                    var user = text.Split(' ').First(x => x.StartsWith("@"));
 
                     botClient.SendTextMessageAsync(
                         chatId: message.Chat.Id,
@@ -130,14 +137,14 @@
 
             if (Regexes.CurseOrderRegexes.Any(r => r.IsMatch(message.Text)))
             {
-                if (message.From.Username == "ivanmilchev")
+                if (message.From.Username.Equals("ivanmilchev", StringComparison.OrdinalIgnoreCase) ||
+                    message.From.Username.Equals("dannykaramanov", StringComparison.OrdinalIgnoreCase))
                 {
-                    var matchingReplies = Replies.Replies.MentionReplies.ToList();
-
+                    var mentionReplies = Replies.Replies.MentionReplies;
                     this.SendReply(
                         botClient,
                         message,
-                        matchingReplies[OnMessageHandler.rand.Next(matchingReplies.Count)]);
+                        mentionReplies[OnMessageHandler.rand.Next(mentionReplies.Count)]);
                 }
                 else
                 {
