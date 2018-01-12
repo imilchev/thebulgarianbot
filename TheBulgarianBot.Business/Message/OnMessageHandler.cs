@@ -93,21 +93,31 @@
                     break;
                 case ReplyType.Mention:
                     var mentionReply = (MentionReply)reply;
-                    var text = message.Text;
+                    var entity = message.Entities.FirstOrDefault(x => x.Type == MessageEntityType.TextMention);
+                    string name;
 
-                    // If the message starts with the name of the bot, then remove it, so it is not parsed.
-                    if (text.StartsWith("@thebulgarianbot"))
+                    if (entity != null)
                     {
-                        var i = text.IndexOf(" ", StringComparison.OrdinalIgnoreCase) + 1;
-                        text = text.Substring(i);
+                        name = $"[{entity.User.FirstName}](tg://user?id={entity.User.Id})";
                     }
+                    else
+                    {
+                        var text = message.Text;
 
-                    var user = text.Split(' ').First(x => x.StartsWith("@"));
+                        // If the message starts with the name of the bot, then remove it, so it is not parsed.
+                        if (text.StartsWith("@thebulgarianbot"))
+                        {
+                            var i = text.IndexOf(" ", StringComparison.OrdinalIgnoreCase) + 1;
+                            text = text.Substring(i);
+                        }
+
+                        name = text.Split(' ').First(x => x.StartsWith("@"));
+                    }
 
                     botClient.SendTextMessageAsync(
                         chatId: message.Chat.Id,
-                        text: mentionReply.GetMessage(user),
-                        parseMode: mentionReply.ParseMode);
+                        text: mentionReply.GetMessage(name),
+                        parseMode: ParseMode.Markdown);
                     break;
                 default:
                     Logger.Logger.WriteLogAsync("[EXCEPTION]: Invalid reply type encountered.");
@@ -139,10 +149,13 @@
             var isMentioned = message.Text.StartsWith("@thebulgarianbot");
             var isPrivate = message.Chat.Type == ChatType.Private;
 
-            if (Regexes.CurseOrderRegexes.Any(r => r.IsMatch(message.Text)))
+            if (Regexes.CurseOrderRegexes.Any(r => r.IsMatch(message.Text)) &&
+                (message.Entities.Any(x => x.Type == MessageEntityType.TextMention) ||
+                 message.Entities.Count(x => x.Type == MessageEntityType.Mention) > 1))
             {
-                if (message.From.Username.Equals("ivanmilchev", StringComparison.OrdinalIgnoreCase) ||
-                    message.From.Username.Equals("dannykaramanov", StringComparison.OrdinalIgnoreCase))
+                if (message.From.Username != null &&
+                    (message.From.Username.Equals("ivanmilchev", StringComparison.OrdinalIgnoreCase) ||
+                     message.From.Username.Equals("dannykaramanov", StringComparison.OrdinalIgnoreCase)))
                 {
                     var mentionReplies = Replies.Replies.MentionReplies;
                     this.SendReply(
@@ -192,26 +205,8 @@
             if (message.ReplyToMessage != null && message.ReplyToMessage.From.IsBot &&
                      message.ReplyToMessage.From.Username.Equals("thebulgarianbot"))
             {
-                // Check if it was a direction mention.
-                var isMentioned = message.Text.StartsWith("@thebulgarianbot");
-                var isPrivate = message.Chat.Type == ChatType.Private;
-
                 // Check whether the bot was directly addressed or if it was a normal message in the chat.
-                var reply = this.MatchReply(
-                    isMentioned && !isPrivate
-                        ? Replies.Replies.DirectReplies
-                        : isPrivate
-                            ? Replies.Replies.RepliesList.Concat(Replies.Replies.DirectReplies).ToList()
-                            : Replies.Replies.RepliesList,
-                    message);
-
-                // Log the message if it was directly addressed to the bot and no reply was found.
-                // Send the default direct reply to the user.
-                if (reply == null && (isMentioned || isPrivate))
-                {
-                    Logger.Logger.LogMessageAsync(message);
-                    reply = Replies.Replies.DefaultDirectReply;
-                }
+                var reply = this.MatchReply(Replies.Replies.DirectReplies, message);
 
                 // If the reply is not null then send it back.
                 if (reply != null)
@@ -239,7 +234,7 @@
                     matchingReplies = replies.Where(r => r.ReplyToText.Any(m => m.IsMatch(message.Text))).ToList();
                     break;
                 case MessageType.StickerMessage:
-                    matchingReplies = replies.Where(r => r.ReplyToText.Any(m => m.IsMatch(message.Sticker.FileId)))
+                    matchingReplies = replies.Where(r => r.ReplyToFileId.Any(m => m.Equals(message.Sticker.FileId)))
                         .ToList();
                     break;
             }

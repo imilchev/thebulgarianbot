@@ -15,14 +15,14 @@
         {
             Regexes.CurseOrderRegexes = new List<Regex>
             {
-                new Regex(@"\bнахрани @\b", RegexOptions.IgnoreCase),
-                new Regex(@"\bnahrani @\b", RegexOptions.IgnoreCase),
-                new Regex(@"\bхрани @\b", RegexOptions.IgnoreCase),
-                new Regex(@"\bhrani @", RegexOptions.IgnoreCase),
-                new Regex(@"\bсипи на @", RegexOptions.IgnoreCase),
-                new Regex(@"\bsipi na @", RegexOptions.IgnoreCase),
-                new Regex(@"\bсложи на @", RegexOptions.IgnoreCase),
-                new Regex(@"\bsloji na @", RegexOptions.IgnoreCase),
+                new Regex(@"\bнахрани ", RegexOptions.IgnoreCase),
+                new Regex(@"\bnahrani ", RegexOptions.IgnoreCase),
+                new Regex(@"\bхрани ", RegexOptions.IgnoreCase),
+                new Regex(@"\bhrani ", RegexOptions.IgnoreCase),
+                new Regex(@"\bсипи на ", RegexOptions.IgnoreCase),
+                new Regex(@"\bsipi na ", RegexOptions.IgnoreCase),
+                new Regex(@"\bсложи на ", RegexOptions.IgnoreCase),
+                new Regex(@"\bsloji na ", RegexOptions.IgnoreCase),
             };
 
             Regexes.CurseRegexes = new List<Regex>

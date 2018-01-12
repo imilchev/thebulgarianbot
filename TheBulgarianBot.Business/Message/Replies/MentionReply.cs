@@ -20,7 +20,7 @@
         /// <param name="parseMode">The parse mode for the message. By default set to <see cref="ParseMode.Default"/>.
         /// </param>
         public MentionReply(string message, IEnumerable<Regex> replyTo, ParseMode parseMode = ParseMode.Default)
-            : base(replyType: ReplyType.Mention, replyTo: replyTo)
+            : base(replyType: ReplyType.Mention, replyToText: replyTo, replyToFileId: new List<string>())
         {
             this.message = message;
             this.ParseMode = parseMode;
