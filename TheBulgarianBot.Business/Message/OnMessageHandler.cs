@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text.RegularExpressions;
     using Replies;
     using Telegram.Bot;
     using Telegram.Bot.Args;
@@ -48,6 +49,9 @@
                         this.HandleTextMessages(botClient, eventData.EventArgs.Message);
                     }
 
+                    break;
+                case MessageType.StickerMessage:
+                    this.HandleStickerMessages(botClient, eventData.EventArgs.Message);
                     break;
             }
         }
@@ -160,7 +164,46 @@
                         : isPrivate
                             ? Replies.Replies.RepliesList.Concat(Replies.Replies.DirectReplies).ToList()
                             : Replies.Replies.RepliesList,
-                    message.Text);
+                    message);
+
+                // Log the message if it was directly addressed to the bot and no reply was found.
+                // Send the default direct reply to the user.
+                if (reply == null && (isMentioned || isPrivate))
+                {
+                    Logger.Logger.LogMessageAsync(message);
+                    reply = Replies.Replies.DefaultDirectReply;
+                }
+
+                // If the reply is not null then send it back.
+                if (reply != null)
+                {
+                    this.SendReply(botClient, message, reply);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Handles the text messages addressed to the bot.
+        /// </summary>
+        /// <param name="botClient">The telegram bot client.</param>
+        /// <param name="message">The message addressed to the bot.</param>
+        private void HandleStickerMessages(TelegramBotClient botClient, Message message)
+        {
+            if (message.ReplyToMessage != null && message.ReplyToMessage.From.IsBot &&
+                     message.ReplyToMessage.From.Username.Equals("thebulgarianbot"))
+            {
+                // Check if it was a direction mention.
+                var isMentioned = message.Text.StartsWith("@thebulgarianbot");
+                var isPrivate = message.Chat.Type == ChatType.Private;
+
+                // Check whether the bot was directly addressed or if it was a normal message in the chat.
+                var reply = this.MatchReply(
+                    isMentioned && !isPrivate
+                        ? Replies.Replies.DirectReplies
+                        : isPrivate
+                            ? Replies.Replies.RepliesList.Concat(Replies.Replies.DirectReplies).ToList()
+                            : Replies.Replies.RepliesList,
+                    message);
 
                 // Log the message if it was directly addressed to the bot and no reply was found.
                 // Send the default direct reply to the user.
@@ -183,12 +226,23 @@
         /// picked. Null if no reply was found.
         /// </summary>
         /// <param name="replies">The list with replies from which one should be picked.</param>
-        /// <param name="messageText">The text of the message that was received.</param>
+        /// <param name="message">The message that was received.</param>
         /// <returns>The corresponding reply if one was found or a random one if many matches. Null if no reply was
         /// found.</returns>
-        private Reply MatchReply(IReadOnlyList<Reply> replies, string messageText)
+        private Reply MatchReply(IReadOnlyList<Reply> replies, Message message)
         {
-            var matchingReplies = replies.Where(r => r.ReplyTo.Any(m => m.IsMatch(messageText))).ToList();
+            List<Reply> matchingReplies = new List<Reply>();
+
+            switch (message.Type)
+            {
+                case MessageType.TextMessage:
+                    matchingReplies = replies.Where(r => r.ReplyToText.Any(m => m.IsMatch(message.Text))).ToList();
+                    break;
+                case MessageType.StickerMessage:
+                    matchingReplies = replies.Where(r => r.ReplyToText.Any(m => m.IsMatch(message.Sticker.FileId)))
+                        .ToList();
+                    break;
+            }
 
             return matchingReplies.Count > 0
                 ? matchingReplies[OnMessageHandler.rand.Next(matchingReplies.Count)]

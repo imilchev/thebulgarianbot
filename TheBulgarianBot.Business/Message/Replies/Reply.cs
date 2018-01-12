@@ -12,12 +12,15 @@
         /// Initializes a new instance of the <see cref="Reply"/> class.
         /// </summary>
         /// <param name="replyType">The type of reply.</param>
-        /// <param name="replyTo">A list of regular expressions to which the reply should be sent if they match with the
-        /// message that was sent.</param>
-        protected Reply(ReplyType replyType, IEnumerable<Regex> replyTo)
+        /// <param name="replyToText">A list of regular expressions to which the reply should be sent if they match with
+        /// the message that was sent.</param>
+        /// <param name="replyToFileId">A list of file identifiers to which the reply should be sent if they match the
+        /// sticker message that was sent.</param>
+        protected Reply(ReplyType replyType, IEnumerable<Regex> replyToText, IEnumerable<string> replyToFileId)
         {
             this.ReplyType = replyType;
-            this.ReplyTo = replyTo;
+            this.ReplyToText = replyToText;
+            this.ReplyToFileId = replyToFileId;
         }
 
         /// <summary>
@@ -29,6 +32,12 @@
         /// Gets or sets a list of regular expressions to which the reply should be sent if they match with the message
         /// that was sent.
         /// </summary>
-        public IEnumerable<Regex> ReplyTo { get; set; }
+        public IEnumerable<Regex> ReplyToText { get; set; }
+
+        /// <summary>
+        /// Gets or sets a list of file identifiers to which the reply should be sent if they match the sticker message
+        /// that was sent.
+        /// </summary>
+        public IEnumerable<string> ReplyToFileId { get; set; }
     }
 }

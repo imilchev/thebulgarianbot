@@ -18,7 +18,7 @@
         /// message that was sent.</param>
         /// <param name="caption">The caption for the photo. By default set to null.</param>
         public PhotoReply(string fileName, IEnumerable<Regex> replyTo, string caption = null)
-            : base(replyType: ReplyType.Photo, replyTo: replyTo)
+            : base(replyType: ReplyType.Photo, replyToText: replyTo, replyToFileId: new List<string>())
         {
             this.FileName = fileName;
             this.Caption = caption;

@@ -14,10 +14,12 @@
         /// Initializes a new instance of the <see cref="StickerReply"/> class.
         /// </summary>
         /// <param name="fileId">The file ID of the sticker to send as reply.</param>
-        /// <param name="replyTo">A list of regular expressions to which the reply should be sent if they match with the
-        /// message that was sent.</param>
-        public StickerReply(string fileId, IEnumerable<Regex> replyTo)
-            : base(replyType: ReplyType.Sticker, replyTo: replyTo)
+        /// <param name="replyToText">A list of regular expressions to which the reply should be sent if they match with
+        /// the message that was sent.</param>
+        /// <param name="replyToFileId">A list of file identifiers to which the reply should be sent if they match the
+        /// sticker message that was sent.</param>
+        public StickerReply(string fileId, IEnumerable<Regex> replyToText, IEnumerable<string> replyToFileId)
+            : base(replyType: ReplyType.Sticker, replyToText: replyToText, replyToFileId: replyToFileId)
         {
             this.FileId = fileId;
         }

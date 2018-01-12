@@ -70,6 +70,8 @@
                 new Regex(@"\bмиризливец\b", RegexOptions.IgnoreCase),
                 new Regex(@"\bдупе\b", RegexOptions.IgnoreCase),
                 new Regex(@"\bдупенце\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bбоклук\b", RegexOptions.IgnoreCase),
+                new Regex(@"\bbokluk\b", RegexOptions.IgnoreCase),
             };
             Regexes.HowAreYouRegexes = new List<Regex>
             {

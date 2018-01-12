@@ -18,7 +18,7 @@
         /// <param name="parseMode">The parse mode for the message. By default set to <see cref="ParseMode.Default"/>.
         /// </param>
         public TextReply(string message, IEnumerable<Regex> replyTo, ParseMode parseMode = ParseMode.Default)
-            : base(replyType: ReplyType.Text, replyTo: replyTo)
+            : base(replyType: ReplyType.Text, replyToText: replyTo, replyToFileId: new List<string>())
         {
             this.Message = message;
             this.ParseMode = parseMode;

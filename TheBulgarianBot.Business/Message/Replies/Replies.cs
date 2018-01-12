@@ -112,18 +112,20 @@
                     replyTo: new List<Regex>().Concat(Regexes.BlackRegexes)),
                 new StickerReply(
                     fileId: "CAADBAADiQAD6l5iBGTArnOBcFBlAg",
-                    replyTo: new List<Regex>
+                    replyToText: new List<Regex>
                     {
                         new Regex(@"\bkifla\b", RegexOptions.IgnoreCase),
                         new Regex(@"\bкифла\b", RegexOptions.IgnoreCase),
-                    }),
+                    },
+                    replyToFileId: new List<string>()),
                 new StickerReply(
                     fileId: "CAADBAADjQAD6l5iBGBZ8bpO8yHZAg",
-                    replyTo: new List<Regex>
+                    replyToText: new List<Regex>
                     {
                         new Regex(@"\bчехъл\b", RegexOptions.IgnoreCase),
                         new Regex(@"\bchehal\b", RegexOptions.IgnoreCase),
-                    }),
+                    },
+                    replyToFileId: new List<string>()),
                 new TextReply(
                     message: "Кифла си!",
                     replyTo: new List<Regex>
@@ -190,11 +192,31 @@
                         new Regex(@"\bnazdrave\b", RegexOptions.IgnoreCase),
                         new Regex(@"\bcheers\b", RegexOptions.IgnoreCase),
                     }),
+                new StickerReply(
+                    fileId: "CAADBAADfwEAAmtfiwZX_aFaLIRcqwI",
+                    replyToText: new List<Regex>
+                    {
+                        new Regex(@"\bдай му\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bdai m(u|y)\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bзадай\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bzadai\b", RegexOptions.IgnoreCase),
+                    },
+                    replyToFileId: new List<string>()),
             };
 
             // Direct replies.
             Replies.DirectReplies = new List<Reply>
             {
+                new StickerReply(
+                    fileId: "CAADBAADfwEAAmtfiwZX_aFaLIRcqwI",
+                    replyToText: new List<Regex>
+                    {
+                        new Regex(@"\bдай му\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bdai m(u|y)\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bзадай\b", RegexOptions.IgnoreCase),
+                        new Regex(@"\bzadai\b", RegexOptions.IgnoreCase),
+                    },
+                    replyToFileId: new List<string> { "CAADBAADfwEAAmtfiwZX_aFaLIRcqwI" }),
                 new TextReply(
                     message: "Every time is a good time for drinking!",
                     replyTo: new List<Regex>
@@ -331,13 +353,14 @@
                     }),
                 new StickerReply(
                     fileId: "CAADBAADiQAD6l5iBGTArnOBcFBlAg",
-                    replyTo: new List<Regex>
+                    replyToText: new List<Regex>
                     {
                         new Regex(@"\bКакв(о|а) е Зори\b", RegexOptions.IgnoreCase),
                         new Regex(@"\bКакв(о|а) е Зорница\b", RegexOptions.IgnoreCase),
                         new Regex(@"\bKakv(o|a) e zori\b", RegexOptions.IgnoreCase),
                         new Regex(@"\bKakv(o|a) e zornica\b", RegexOptions.IgnoreCase),
-                    }),
+                    },
+                    replyToFileId: new List<string>()),
                 new TextReply(
                     message: "Не си ти човекът, който ще ми задава наклон на хуя!",
                     replyTo: new List<Regex>
