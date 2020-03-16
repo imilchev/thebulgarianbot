@@ -1,28 +1,25 @@
-﻿namespace TheBulgarianBot.Application
-{
-    using System;
-    using System.Reflection;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
-    /// <summary>
-    /// Entry point for the console application.
-    /// </summary>
+namespace TheBulgarianBot.Application
+{
     public class Program
     {
-        /// <summary>
-        /// The entry point for the console application.
-        /// </summary>
-        /// <param name="args">The launch arguments.</param>
         public static void Main(string[] args)
         {
-            var theBulgarianBot = new Business.TheBulgarianBot();
-            theBulgarianBot.StartReceiving();
-            Console.WriteLine("The bot is started.");
-
-            Console.WriteLine();
-            Console.WriteLine("Press any key to kill the bot...");
-            Console.ReadLine();
-
-            theBulgarianBot.StopReceiving();
+            Program.CreateHostBuilder(args).Build().Run();
         }
+
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureServices((hostContext, services) =>
+                {
+                    services.AddHostedService<Worker>();
+                    services.AddSingleton<Business.TheBulgarianBot>();
+                });
     }
 }

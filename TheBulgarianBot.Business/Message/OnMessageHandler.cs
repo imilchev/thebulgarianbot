@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text.RegularExpressions;
+    using System.Threading.Tasks;
     using Replies;
     using Telegram.Bot;
     using Telegram.Bot.Args;
@@ -33,26 +34,33 @@
         /// Handles the message received event.
         /// </summary>
         /// <param name="data">The event data.</param>
-        public void OnMessage(object data)
+        public async void OnMessage(object data)
         {
-            var eventData = (EventData<MessageEventArgs>)data;
-            var botClient = eventData.Client;
-            switch (eventData.EventArgs.Message.Type)
+            try
             {
-                case MessageType.TextMessage:
-                    if (eventData.EventArgs.Message.Text.StartsWith("/"))
-                    {
-                        this.HandleCommands(botClient, eventData.EventArgs.Message);
-                    }
-                    else
-                    {
-                        this.HandleTextMessages(botClient, eventData.EventArgs.Message);
-                    }
+                var eventData = (EventData<MessageEventArgs>)data;
+                var botClient = eventData.Client;
+                switch (eventData.EventArgs.Message.Type)
+                {
+                    case MessageType.Text:
+                        if (eventData.EventArgs.Message.Text.StartsWith("/"))
+                        {
+                            await this.HandleCommands(botClient, eventData.EventArgs.Message);
+                        }
+                        else
+                        {
+                            await this.HandleTextMessages(botClient, eventData.EventArgs.Message);
+                        }
 
-                    break;
-                case MessageType.StickerMessage:
-                    this.HandleStickerMessages(botClient, eventData.EventArgs.Message);
-                    break;
+                        break;
+                    case MessageType.Sticker:
+                        await this.HandleStickerMessages(botClient, eventData.EventArgs.Message);
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Logger.Instance.Fatal(ex, "Unexpected error");
             }
         }
 
@@ -62,7 +70,7 @@
         /// <param name="botClient">The bot client.</param>
         /// <param name="message">The original message that was sent.</param>
         /// <param name="reply">The reply to be sent.</param>
-        private void SendReply(TelegramBotClient botClient, Message message, Reply reply)
+        private async Task SendReply(TelegramBotClient botClient, Message message, Reply reply)
         {
             var replyToMessageId = message.Chat.Type == ChatType.Private ? 0 : message.MessageId;
 
@@ -70,7 +78,7 @@
             {
                 case ReplyType.Text:
                     var textReply = (TextReply)reply;
-                    botClient.SendTextMessageAsync(
+                    await botClient.SendTextMessageAsync(
                             chatId: message.Chat.Id,
                             text: textReply.Message,
                             replyToMessageId: replyToMessageId,
@@ -78,7 +86,7 @@
                     break;
                 case ReplyType.Photo:
                     var photoReply = (PhotoReply)reply;
-                    botClient.SendPhotoAsync(
+                    await botClient.SendPhotoAsync(
                         chatId: message.Chat.Id,
                         photo: photoReply.FileToSend,
                         caption: photoReply.Caption,
@@ -86,41 +94,21 @@
                     break;
                 case ReplyType.Sticker:
                     var stickerReply = (StickerReply)reply;
-                    botClient.SendStickerAsync(
+                    await botClient.SendStickerAsync(
                         chatId: message.Chat.Id,
                         sticker: stickerReply.Sticker,
                         replyToMessageId: replyToMessageId);
                     break;
                 case ReplyType.Mention:
                     var mentionReply = (MentionReply)reply;
-                    var entity = message.Entities.FirstOrDefault(x => x.Type == MessageEntityType.TextMention);
-                    string name;
 
-                    if (entity != null)
-                    {
-                        name = $"[{entity.User.FirstName}](tg://user?id={entity.User.Id})";
-                    }
-                    else
-                    {
-                        var text = message.Text;
-
-                        // If the message starts with the name of the bot, then remove it, so it is not parsed.
-                        if (text.StartsWith("@thebulgarianbot"))
-                        {
-                            var i = text.IndexOf(" ", StringComparison.OrdinalIgnoreCase) + 1;
-                            text = text.Substring(i);
-                        }
-
-                        name = text.Split(' ').First(x => x.StartsWith("@"));
-                    }
-
-                    botClient.SendTextMessageAsync(
+                    await botClient.SendTextMessageAsync(
                         chatId: message.Chat.Id,
-                        text: mentionReply.GetMessage(name),
+                        text: mentionReply.GetMessage(MentionReply.GetReplyToUsername(message)),
                         parseMode: ParseMode.Markdown);
                     break;
                 default:
-                    Logger.Logger.WriteLogAsync("[EXCEPTION]: Invalid reply type encountered.");
+                    Logger.Logger.Instance.Error("Invalid reply type {ReplyType} encountered.", reply.ReplyType);
                     break;
             }
         }
@@ -130,11 +118,11 @@
         /// </summary>
         /// <param name="botClient">The telegram bot client instance.</param>
         /// <param name="message">The message containing the command.</param>
-        private void HandleCommands(TelegramBotClient botClient, Message message)
+        private async Task HandleCommands(TelegramBotClient botClient, Message message)
         {
             if (message.Text.StartsWith("/typical"))
             {
-                TypicalCommandHandler.HandleTypicalCommand(botClient, message);
+                await TypicalCommandHandler.HandleTypicalCommand(botClient, message);
             }
         }
 
@@ -143,7 +131,7 @@
         /// </summary>
         /// <param name="botClient">The telegram bot client.</param>
         /// <param name="message">The message addressed to the bot.</param>
-        private void HandleTextMessages(TelegramBotClient botClient, Message message)
+        private async Task HandleTextMessages(TelegramBotClient botClient, Message message)
         {
             // Check if it was a direction mention.
             var isMentioned = message.Text.StartsWith("@thebulgarianbot");
@@ -153,19 +141,17 @@
                 (message.Entities.Any(x => x.Type == MessageEntityType.TextMention) ||
                  message.Entities.Count(x => x.Type == MessageEntityType.Mention) > 1))
             {
-                if (message.From.Username != null &&
-                    (message.From.Username.Equals("ivanmilchev", StringComparison.OrdinalIgnoreCase) ||
-                     message.From.Username.Equals("dannykaramanov", StringComparison.OrdinalIgnoreCase)))
+                if (message.From.Username != null && !MentionReply.IsReplyToUsernameEqualTo(message, "ivanmilchev"))
                 {
                     var mentionReplies = Replies.Replies.MentionReplies;
-                    this.SendReply(
+                    await this.SendReply(
                         botClient,
                         message,
                         mentionReplies[OnMessageHandler.rand.Next(mentionReplies.Count)]);
                 }
                 else
                 {
-                    this.SendReply(botClient, message, Replies.Replies.DefaultCurseOrderReply);
+                    await this.SendReply(botClient, message, Replies.Replies.DefaultCurseOrderReply);
                 }
             }
             else
@@ -183,14 +169,14 @@
                 // Send the default direct reply to the user.
                 if (reply == null && (isMentioned || isPrivate))
                 {
-                    Logger.Logger.LogMessageAsync(message);
+                    Logger.Logger.Instance.Warning("{Username}: {Text}", message.From.Username, message.Text);
                     reply = Replies.Replies.DefaultDirectReply;
                 }
 
                 // If the reply is not null then send it back.
                 if (reply != null)
                 {
-                    this.SendReply(botClient, message, reply);
+                    await this.SendReply(botClient, message, reply);
                 }
             }
         }
@@ -200,7 +186,7 @@
         /// </summary>
         /// <param name="botClient">The telegram bot client.</param>
         /// <param name="message">The message addressed to the bot.</param>
-        private void HandleStickerMessages(TelegramBotClient botClient, Message message)
+        private async Task HandleStickerMessages(TelegramBotClient botClient, Message message)
         {
             if (message.ReplyToMessage != null && message.ReplyToMessage.From.IsBot &&
                      message.ReplyToMessage.From.Username.Equals("thebulgarianbot"))
@@ -211,7 +197,7 @@
                 // If the reply is not null then send it back.
                 if (reply != null)
                 {
-                    this.SendReply(botClient, message, reply);
+                    await this.SendReply(botClient, message, reply);
                 }
             }
         }
@@ -230,10 +216,10 @@
 
             switch (message.Type)
             {
-                case MessageType.TextMessage:
+                case MessageType.Text:
                     matchingReplies = replies.Where(r => r.ReplyToText.Any(m => m.IsMatch(message.Text))).ToList();
                     break;
-                case MessageType.StickerMessage:
+                case MessageType.Sticker:
                     matchingReplies = replies.Where(r => r.ReplyToFileId.Any(m => m.Equals(message.Sticker.FileId)))
                         .ToList();
                     break;

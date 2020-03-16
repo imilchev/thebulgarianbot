@@ -6,8 +6,10 @@
     using System.Drawing.Imaging;
     using System.IO;
     using System.Linq;
+    using System.Threading.Tasks;
     using Telegram.Bot;
     using Telegram.Bot.Types;
+    using Telegram.Bot.Types.InputFiles;
 
     /// <summary>
     /// Handles the /typical command.
@@ -32,10 +34,10 @@
         /// </summary>
         /// <param name="botClient">The telegram bot client instance</param>
         /// <param name="message">The message containing the command.</param>
-        public static void HandleTypicalCommand(TelegramBotClient botClient, Message message)
+        public static async Task HandleTypicalCommand(TelegramBotClient botClient, Message message)
         {
             // Get the profile pics for the user.
-            var profilePics = botClient.GetUserProfilePhotosAsync(message.From.Id).Result;
+            var profilePics = await botClient.GetUserProfilePhotosAsync(message.From.Id);
 
             if (profilePics.TotalCount > 0)
             {
@@ -50,77 +52,85 @@
                     profilePicsFilteredList[TypicalCommandHandler.rand.Next(profilePicsFilteredList.Count)];
 
                 // Retrieve the picture itself.
-                var profilePicFile = botClient.GetFileAsync(profilePic.FileId).Result;
 
+                using var profilePicStream = new MemoryStream();
+                
                 var text =
                     TypicalTexts.TypicalTextsList[TypicalCommandHandler.rand.Next(TypicalTexts.TypicalTextsList.Count)];
 
-                using (var image = Image.FromStream(profilePicFile.FileStream))
-                using (var graphics = Graphics.FromImage(image))
-                using (var ms = new MemoryStream())
-                using (var topPath = new GraphicsPath())
-                using (var bottomPath = new GraphicsPath())
-                using (var stringFormat =
-                    new StringFormat(StringFormat.GenericDefault) { Alignment = StringAlignment.Center })
-                {
-                    // Determine initial font size.
-                    var fontSize = profilePic.Height / 15;
+                var profileFile = await botClient.GetFileAsync(profilePic.FileId);
+                await botClient.DownloadFileAsync(profileFile.FilePath, profilePicStream);
 
-                    // Create the font.
-                    var font = new Font("Arial", fontSize, FontStyle.Bold);
+                using var image = Image.FromStream(profilePicStream);
+                using var graphics = Graphics.FromImage(image);
+                using var ms = new MemoryStream();
+                using var stringFormat = new StringFormat(StringFormat.GenericDefault) { Alignment = StringAlignment.Center };
+                // Determine initial font size.
+                var fontSize = profilePic.Height / 15;
 
-                    // Determine whether the top or the bottom text is longer.
-                    var longerText = text.TopText.Length > text.BottomText.Length ? text.TopText : text.BottomText;
+                // Create the font.
+                var font = new Font("DejaVu Sans", fontSize, FontStyle.Bold);
 
-                    var top = new RectangleF(new PointF(0, 0), new SizeF(profilePic.Width, (fontSize * 1.4f)));
+                // Determine whether the top or the bottom text is longer.
+                var longerText = text.TopText.Length > text.BottomText.Length ? text.TopText : text.BottomText;
 
-                    font = TypicalCommandHandler.GetFontSize(font, graphics, longerText, profilePic.Width);
+                font = TypicalCommandHandler.GetFontSize(font, graphics, longerText, profilePic.Width);
 
-                    graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
-                    // Add the string to the path.
-                    topPath.AddString(
-                        text.TopText, // text to draw
-                        font.FontFamily, // or any other font family
-                        (int)font.Style, // font style (bold, italic, etc.)
-                        graphics.DpiY * font.Size / 72, // em size
-                        top, // location where to draw text
-                        stringFormat); // set options here (e.g. center alignment)
+                var textContainingBox = new SizeF(profilePic.Width, fontSize * 1.4f);
 
-                    graphics.DrawPath(new Pen(Brushes.Black, font.Size / 10), topPath);
-                    graphics.FillPath(Brushes.White, topPath);
+                // Top text
+                var top = new RectangleF(new PointF(0, 0), new SizeF(profilePic.Width, (fontSize * 1.4f)));
 
-                    var bottom = new RectangleF(
-                        new PointF(0, profilePic.Height - (fontSize * 1.4f)),
-                        new SizeF(profilePic.Width, fontSize * 1.4f));
+                graphics.DrawString(text.TopText,
+                    font,
+                    Brushes.Black,
+                    new RectangleF(new PointF(0, -2), textContainingBox),
+                    stringFormat);
+                graphics.DrawString(
+                    text.TopText,
+                    font,
+                    Brushes.Black,
+                    new RectangleF(new PointF(0, 2), textContainingBox),
+                    stringFormat);
+                graphics.DrawString(text.TopText, font, Brushes.White, top, stringFormat);
 
-                    // Add the string to the path.
-                    bottomPath.AddString(
-                        text.BottomText, // text to draw
-                        font.FontFamily, // or any other font family
-                        (int)font.Style, // font style (bold, italic, etc.)
-                        graphics.DpiY * font.Size / 72, // em size
-                        bottom, // location where to draw text
-                        stringFormat); // set options here (e.g. center alignment)
-                    graphics.DrawPath(new Pen(Brushes.Black, font.Size / 10), bottomPath);
-                    graphics.FillPath(Brushes.White, bottomPath);
+                // Bottom text
+                var bottomPointY = profilePic.Height - (fontSize * 1.4f);
+                var bottom = new RectangleF(
+                    new PointF(0, bottomPointY),
+                    new SizeF(profilePic.Width, fontSize * 1.4f));
 
-                    // Save the resulting image in a memory stream.
-                    image.Save(ms, ImageFormat.Png);
+                graphics.DrawString(
+                    text.BottomText,
+                    font,
+                    Brushes.Black,
+                    new RectangleF(new PointF(0, bottomPointY - 2), textContainingBox),
+                    stringFormat);
+                graphics.DrawString(
+                    text.BottomText,
+                    font,
+                    Brushes.Black,
+                    new RectangleF(new PointF(0, bottomPointY + 2), textContainingBox),
+                    stringFormat);
+                graphics.DrawString(text.BottomText, font, Brushes.White, bottom, stringFormat);
 
-                    // Restart the position of the pointer in the memory stream, otherwise an exception occurs.
-                    ms.Position = 0;
+                // Save the resulting image in a memory stream.
+                image.Save(ms, ImageFormat.Png);
 
-                    // Wait for the call to return, otherwise the objects will be disposed before they are sent.
-                    botClient.SendPhotoAsync(message.Chat.Id, new FileToSend("typical.png", ms)).Wait();
+                // Restart the position of the pointer in the memory stream, otherwise an exception occurs.
+                ms.Position = 0;
 
-                    // Dispose the font and paths since they are not in a using statement.
-                    font.Dispose();
-                }
+                // Wait for the call to return, otherwise the objects will be disposed before they are sent.
+                botClient.SendPhotoAsync(message.Chat.Id, new InputOnlineFile(ms, "typical.png")).Wait();
+
+                // Dispose the font and paths since they are not in a using statement.
+                font.Dispose();
             }
             else
             {
-                botClient.SendTextMessageAsync(message.Chat.Id, "Sloji si snimka i posle me zanimavai we");
+                await botClient.SendTextMessageAsync(message.Chat.Id, "Sloji si snimka i posle me zanimavai we");
             }
         }
 

@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheBulgarianBot.Business", "TheBulgarianBot.Business\TheBulgarianBot.Business.csproj", "{5F8A3DB3-4C2E-4AE3-88E6-63D26C28CE0E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheBulgarianBot.Application", "TheBulgarianBot.Application\TheBulgarianBot.Application.csproj", "{E6BAEE93-6AAC-4B78-8549-602E70425061}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheBulgarianBot.Application", "TheBulgarianBot.Application\TheBulgarianBot.Application.csproj", "{57413772-2DC0-49DC-BFEC-8F0EBA055DA8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{5F8A3DB3-4C2E-4AE3-88E6-63D26C28CE0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F8A3DB3-4C2E-4AE3-88E6-63D26C28CE0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F8A3DB3-4C2E-4AE3-88E6-63D26C28CE0E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E6BAEE93-6AAC-4B78-8549-602E70425061}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E6BAEE93-6AAC-4B78-8549-602E70425061}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E6BAEE93-6AAC-4B78-8549-602E70425061}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E6BAEE93-6AAC-4B78-8549-602E70425061}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57413772-2DC0-49DC-BFEC-8F0EBA055DA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57413772-2DC0-49DC-BFEC-8F0EBA055DA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57413772-2DC0-49DC-BFEC-8F0EBA055DA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57413772-2DC0-49DC-BFEC-8F0EBA055DA8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

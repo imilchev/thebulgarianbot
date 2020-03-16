@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Text.RegularExpressions;
     using global::TheBulgarianBot.Business.Resource;
-    using Telegram.Bot.Types;
+    using Telegram.Bot.Types.InputFiles;
 
     /// <summary>
     /// A class representing a sticker reply.
@@ -32,6 +32,6 @@
         /// <summary>
         /// Gets the corresponding file that should be sent.
         /// </summary>
-        public FileToSend Sticker => new FileToSend(this.FileId);
+        public InputOnlineFile Sticker => new InputOnlineFile(this.FileId);
     }
 }

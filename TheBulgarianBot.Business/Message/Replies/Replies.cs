@@ -46,7 +46,7 @@
                 "Я се погледни че приличаш на млековарка на горнобански път бре!!!!!!",
                 "Като те гледам какъв си се сещам, че понякога природата е много жестока.",
                 "Родилен продукт на гадна, фригидна, беззъба пъпчива вешица с космати крака!!!",
-                "Изчезни кат` падаща мазилка уе...",
+                "Изчезни кат падаща мазилка уе...",
                 "Може да си грозен, но пък за сметка на това си тъп.",
                 "Толкова си грозен, че майка ти сигурно те е хранила с прашка?!",
                 "Ей овцо миризлива , да се мъчиш на мек хуй.",
@@ -62,7 +62,7 @@
 
             // Default curse order reply.
             Replies.DefaultCurseOrderReply = new TextReply(
-                message: "Я не ми задавай наклон на хуя!",
+                message: "Я не ми задавай наклон на хуя! Aз баща си не нареждам!",
                 replyTo: new List<Regex>());
 
             // Replies list.
@@ -104,7 +104,7 @@
                     replyTo: new List<Regex>().Concat(Regexes.BlackRegexes),
                     parseMode: ParseMode.Markdown),
                 new TextReply(
-                    message: "*Na sapun!*",
+                    message: "*На сапун!*",
                     replyTo: new List<Regex>().Concat(Regexes.BlackRegexes),
                     parseMode: ParseMode.Markdown),
                 new PhotoReply(
@@ -235,7 +235,7 @@
                     }),
                 new PhotoReply(
                     fileName: "rakia.png",
-                    caption: "The best drink man can get - RAKIA! Mamka mu!",
+                    caption: "The best drink man can get - RAKIA! Мамка му!",
                     replyTo: new List<Regex>
                     {
                         new Regex(@"\bWhat do Bulgarians drink\b", RegexOptions.IgnoreCase),
@@ -245,7 +245,7 @@
                     }),
                 new PhotoReply(
                     fileName: "rakia.png",
-                    caption: "Rakia we, kvo moje da piem??",
+                    caption: "Ракия уе, кво може да пием??",
                     replyTo: new List<Regex>
                     {
                         new Regex(@"\bK(ak)?vo (sh(te)?)? piem\b", RegexOptions.IgnoreCase),
@@ -264,21 +264,21 @@
                         new Regex(@"\bpokaji b(u|a)lgari(a|q)\b", RegexOptions.IgnoreCase),
                     }),
                 new TextReply(
-                    message: "Ti si pedal we, kaltak!",
+                    message: "Ти си педал уе, калтак!",
                     replyTo: new List<Regex>
                     {
                         new Regex(@"\bpedal\b", RegexOptions.IgnoreCase),
                         new Regex(@"\bпедал\b", RegexOptions.IgnoreCase),
                     }),
                 new TextReply(
-                    message: "Mn qsno che sh piem we 😊",
+                    message: "Мн ясно че ш пием уе 😊",
                     replyTo: new List<Regex>
                     {
                         new Regex(@"\bsh(te)? piem li\b", RegexOptions.IgnoreCase),
                         new Regex(@"\bще пием ли\b", RegexOptions.IgnoreCase)
                     }),
                 new TextReply(
-                    message: "Extra sam, bepce 😊",
+                    message: "Екстра съм, бепце 😊",
                     replyTo: new List<Regex>().Concat(Regexes.HowAreYouRegexes)),
                 new TextReply(
                     message: "Беля краставицата",
@@ -322,7 +322,7 @@
                     message: "Real men drink only rakia",
                     replyTo: new List<Regex>().Concat(Regexes.AlcoholRegexes)),
                 new TextReply(
-                    message: "ne si dorasal za da ocenish rakiata",
+                    message: "не си дорасал за да оцениш ракията",
                     replyTo: new List<Regex>().Concat(Regexes.AlcoholRegexes)),
                 new TextReply(
                     message: "I'M ALIIIIIIIIIIVE",

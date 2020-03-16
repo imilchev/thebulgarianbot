@@ -4,6 +4,7 @@
     using System.Text.RegularExpressions;
     using global::TheBulgarianBot.Business.Resource;
     using Telegram.Bot.Types;
+    using Telegram.Bot.Types.InputFiles;
 
     /// <summary>
     /// A class representing a photo reply.
@@ -37,6 +38,6 @@
         /// <summary>
         /// Gets the corresponding file that should be sent.
         /// </summary>
-        public FileToSend FileToSend => new FileToSend(this.FileName, ResourceLoader.LoadResource(this.FileName));
+        public InputOnlineFile FileToSend => new InputOnlineFile(ResourceLoader.LoadResource(this.FileName), this.FileName);
     }
 }

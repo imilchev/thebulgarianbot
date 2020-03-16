@@ -1,0 +1,31 @@
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
+WORKDIR /app
+
+# copy csproj and restore as distinct layers
+COPY *.sln .
+COPY TheBulgarianBot.Application/TheBulgarianBot.Application.csproj ./TheBulgarianBot.Application/
+COPY TheBulgarianBot.Business/TheBulgarianBot.Business.csproj ./TheBulgarianBot.Business/
+RUN dotnet restore
+
+# copy everything else and build app
+COPY TheBulgarianBot.Application/. ./TheBulgarianBot.Application/
+COPY TheBulgarianBot.Business/. ./TheBulgarianBot.Business/
+WORKDIR /app/TheBulgarianBot.Application
+RUN dotnet publish -c Release -o out
+
+
+FROM mcr.microsoft.com/dotnet/core/runtime:3.1-buster-slim-arm32v7 AS runtime
+
+RUN apt-get update \
+    && apt-get install -y --allow-unauthenticated \
+        libc6-dev \
+        libgdiplus \
+        libx11-dev \
+     && rm -rf /var/lib/apt/lists/*
+
+ENV ASPNETCORE_ENVIRONMENT "Development"
+
+WORKDIR /app
+COPY --from=build /app/TheBulgarianBot.Application/out ./
+
+ENTRYPOINT ["dotnet", "TheBulgarianBot.Application.dll"]
