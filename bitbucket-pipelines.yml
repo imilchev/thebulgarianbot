@@ -8,6 +8,7 @@
 pipelines:
   default:
     - step:
+        name: Build Docker container
         script: # Modify the commands below to build your repository.
           - docker build -t thebulgarianbot .
         services:
