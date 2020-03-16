@@ -19,21 +19,22 @@
         /// <summary>
         /// Holds the instance for random generation.
         /// </summary>
-        private static readonly Random rand;
+        private static readonly Random Rand;
 
         /// <summary>
         /// Initializes static members of the <see cref="TypicalCommandHandler"/> class.
         /// </summary>
         static TypicalCommandHandler()
         {
-            TypicalCommandHandler.rand = new Random();
+            TypicalCommandHandler.Rand = new Random();
         }
 
         /// <summary>
         /// Handles the /typical command, by retrieving the user's profile picture and putting a random text on it.
         /// </summary>
-        /// <param name="botClient">The telegram bot client instance</param>
+        /// <param name="botClient">The telegram bot client instance.</param>
         /// <param name="message">The message containing the command.</param>
+        /// <returns>A task that is resolved once the method execution is completed.</returns>
         public static async Task HandleTypicalCommand(TelegramBotClient botClient, Message message)
         {
             // Get the profile pics for the user.
@@ -49,14 +50,12 @@
 
                 // Get a random picture of that size.
                 var profilePic =
-                    profilePicsFilteredList[TypicalCommandHandler.rand.Next(profilePicsFilteredList.Count)];
+                    profilePicsFilteredList[TypicalCommandHandler.Rand.Next(profilePicsFilteredList.Count)];
 
                 // Retrieve the picture itself.
-
                 using var profilePicStream = new MemoryStream();
-                
                 var text =
-                    TypicalTexts.TypicalTextsList[TypicalCommandHandler.rand.Next(TypicalTexts.TypicalTextsList.Count)];
+                    TypicalTexts.TypicalTextsList[TypicalCommandHandler.Rand.Next(TypicalTexts.TypicalTextsList.Count)];
 
                 var profileFile = await botClient.GetFileAsync(profilePic.FileId);
                 await botClient.DownloadFileAsync(profileFile.FilePath, profilePicStream);
@@ -65,6 +64,7 @@
                 using var graphics = Graphics.FromImage(image);
                 using var ms = new MemoryStream();
                 using var stringFormat = new StringFormat(StringFormat.GenericDefault) { Alignment = StringAlignment.Center };
+
                 // Determine initial font size.
                 var fontSize = profilePic.Height / 15;
 
@@ -81,18 +81,19 @@
                 var textContainingBox = new SizeF(profilePic.Width, fontSize * 1.4f);
 
                 // Top text
-                var top = new RectangleF(new PointF(0, 0), new SizeF(profilePic.Width, (fontSize * 1.4f)));
+                var top = new RectangleF(new PointF(0, 0), new SizeF(profilePic.Width, fontSize * 1.4f));
 
-                graphics.DrawString(text.TopText,
+                graphics.DrawString(
+                    text.TopText,
                     font,
                     Brushes.Black,
-                    new RectangleF(new PointF(0, -2), textContainingBox),
+                    new RectangleF(new PointF(-2, -2), textContainingBox),
                     stringFormat);
                 graphics.DrawString(
                     text.TopText,
                     font,
                     Brushes.Black,
-                    new RectangleF(new PointF(0, 2), textContainingBox),
+                    new RectangleF(new PointF(-2, 2), textContainingBox),
                     stringFormat);
                 graphics.DrawString(text.TopText, font, Brushes.White, top, stringFormat);
 
@@ -106,13 +107,13 @@
                     text.BottomText,
                     font,
                     Brushes.Black,
-                    new RectangleF(new PointF(0, bottomPointY - 2), textContainingBox),
+                    new RectangleF(new PointF(-2, bottomPointY - 2), textContainingBox),
                     stringFormat);
                 graphics.DrawString(
                     text.BottomText,
                     font,
                     Brushes.Black,
-                    new RectangleF(new PointF(0, bottomPointY + 2), textContainingBox),
+                    new RectangleF(new PointF(-2, bottomPointY + 2), textContainingBox),
                     stringFormat);
                 graphics.DrawString(text.BottomText, font, Brushes.White, bottom, stringFormat);
 

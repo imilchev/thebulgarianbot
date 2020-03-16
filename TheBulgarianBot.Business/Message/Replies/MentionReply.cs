@@ -35,16 +35,6 @@
         public ParseMode ParseMode { get; set; }
 
         /// <summary>
-        /// Gets the message for this reply by prepending the <see cref="message"/> in front of the message.
-        /// </summary>
-        /// <param name="username">The username which should be mentioned</param>
-        /// <returns>The message</returns>
-        public string GetMessage(string username)
-        {
-            return $"{username}, {this.message}";
-        }
-
-        /// <summary>
         /// Gets the username to which the message should reply.
         /// </summary>
         /// <param name="message">The message requesting the mention.</param>
@@ -100,6 +90,16 @@
             }
 
             return text.Split(' ').First(x => x.StartsWith("@")).Equals($"@{username}", StringComparison.OrdinalIgnoreCase);
+        }
+
+        /// <summary>
+        /// Gets the message for this reply by prepending the <see cref="message"/> in front of the message.
+        /// </summary>
+        /// <param name="username">The username which should be mentioned.</param>
+        /// <returns>The message.</returns>
+        public string GetMessage(string username)
+        {
+            return $"{username}, {this.message}";
         }
     }
 }

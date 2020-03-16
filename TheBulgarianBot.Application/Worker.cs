@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 
 namespace TheBulgarianBot.Application
@@ -9,9 +10,9 @@ namespace TheBulgarianBot.Application
     {
         private readonly Business.TheBulgarianBot theBulgarianBot;
 
-        public Worker()
+        public Worker(IConfiguration config)
         {
-            this.theBulgarianBot = new Business.TheBulgarianBot();
+            this.theBulgarianBot = new Business.TheBulgarianBot(config["BotToken"]);
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)

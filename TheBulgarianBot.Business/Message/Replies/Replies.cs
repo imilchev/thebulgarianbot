@@ -45,19 +45,34 @@
                 "Да лапаш задопашна жлеза на южно-американски скункс!",
                 "Я се погледни че приличаш на млековарка на горнобански път бре!!!!!!",
                 "Като те гледам какъв си се сещам, че понякога природата е много жестока.",
-                "Родилен продукт на гадна, фригидна, беззъба пъпчива вешица с космати крака!!!",
+                "Родилен продукт на гадна, фригидна, беззъба пъпчива вещица с космати крака!!!",
                 "Изчезни кат падаща мазилка уе...",
                 "Може да си грозен, но пък за сметка на това си тъп.",
                 "Толкова си грозен, че майка ти сигурно те е хранила с прашка?!",
                 "Ей овцо миризлива , да се мъчиш на мек хуй.",
                 "Кон да ебе cеcтра ти на гроба на майка ти, докато бащта ти гледа падайки от cамолет",
                 "Триста метра бодлива тел да изсереш!",
-                "Миньор да търси злато в гъза ти!"
+                "Миньор да търси злато в гъза ти!",
+                "Лайнар мръсен! И мухите ги е гнус от тебе.",
+                "Някога в детcката cи възраcт помиcлил ли cи, че от тебе ще излезе такава отрепка, а?",
+                "Плоска си като батерия от 4.5 волта.",
+                "Имам тука едно прясно лайно-халал да ти е!",
+                "Да ти го нафтъкам в кривата дюза!",
+                "Ще ти възпаля дебелото черво от анална експанзия.",
+                "Да го духаш под вода, докато изсъхне!",
+                "Да ти го набръчкам в анално-пърдиялната охлузена хемороидна вена бе, обезмаден безхуйов пеликан.",
+                "Крокодил да ти оглозга грездея!",
+                "Гол да го бараш, сополив да го духаш!",
+                "Майка ти е толкова дебела, че за cнимките на документите триябва да я cнимат от cпътник!",
+                "Миньор да търcи злато в гъза ти.",
+                "Гъза ти е голям като паркинг c 52 меcта ма!",
+                "А бе, толкова си тъп, че ако беше шаран, щяха да те ловят с бастун!",
+                "Лапай месото, животно ЗЛОЯДО!",
             };
 
             // Default direct reply.
             Replies.DefaultDirectReply = new TextReply(
-                message: "WTF are you talking about, kopele?",
+                message: "Не та разбирам уе, този?",
                 replyTo: new List<Regex>());
 
             // Default curse order reply.
@@ -72,7 +87,7 @@
                     message: "```triggered```",
                     replyTo: new List<Regex>
                     {
-                        new Regex(@"\bfree\b", RegexOptions.IgnoreCase)
+                        new Regex(@"\bfree\b", RegexOptions.IgnoreCase),
                     },
                     parseMode: ParseMode.Markdown),
                 new TextReply(
@@ -85,7 +100,7 @@
                         new Regex(@"\bевтино?\b", RegexOptions.IgnoreCase),
                         new Regex(@"\bcheap(er)?\b", RegexOptions.IgnoreCase),
                         new Regex(@"\bразпродажб(а|и)\b", RegexOptions.IgnoreCase),
-                        new Regex(@"\brazprodajb(a|i)\b", RegexOptions.IgnoreCase)
+                        new Regex(@"\brazprodajb(a|i)\b", RegexOptions.IgnoreCase),
                     }),
                 new TextReply(
                     message: "Zdravei, uruspia",
@@ -93,7 +108,7 @@
                     {
                         new Regex(@"\bangelica\b", RegexOptions.IgnoreCase),
                         new Regex(@"\bgirls?\b", RegexOptions.IgnoreCase),
-                        new Regex(@"\bwom(a|e)n\b", RegexOptions.IgnoreCase)
+                        new Regex(@"\bwom(a|e)n\b", RegexOptions.IgnoreCase),
                     }),
                 new TextReply(
                     message: "*Gas chamber!*",
@@ -130,7 +145,7 @@
                     message: "Кифла си!",
                     replyTo: new List<Regex>
                     {
-                        new Regex(@"\bне съм кифла\b", RegexOptions.IgnoreCase)
+                        new Regex(@"\bне съм кифла\b", RegexOptions.IgnoreCase),
                     }),
                 new TextReply(
                     message: "Пръскаммм!",
@@ -221,7 +236,7 @@
                     message: "Every time is a good time for drinking!",
                     replyTo: new List<Regex>
                     {
-                        new Regex(@"\bWhen (should|must) \w+ drink\b", RegexOptions.IgnoreCase)
+                        new Regex(@"\bWhen (should|must) \w+ drink\b", RegexOptions.IgnoreCase),
                     }),
                 new TextReply(
                     message: "По всяко време!",
@@ -241,7 +256,7 @@
                         new Regex(@"\bWhat do Bulgarians drink\b", RegexOptions.IgnoreCase),
                         new Regex(@"\bNational drink\b", RegexOptions.IgnoreCase),
                         new Regex(@"\bWhat (to|should) \w+ drink\b", RegexOptions.IgnoreCase),
-                        new Regex(@"\bWhat to drink\b", RegexOptions.IgnoreCase)
+                        new Regex(@"\bWhat to drink\b", RegexOptions.IgnoreCase),
                     }),
                 new PhotoReply(
                     fileName: "rakia.png",
@@ -249,7 +264,7 @@
                     replyTo: new List<Regex>
                     {
                         new Regex(@"\bK(ak)?vo (sh(te)?)? piem\b", RegexOptions.IgnoreCase),
-                        new Regex(@"\bК(ак)?во (ще)? пием\b", RegexOptions.IgnoreCase)
+                        new Regex(@"\bК(ак)?во (ще)? пием\b", RegexOptions.IgnoreCase),
                     }),
                 new PhotoReply(
                     fileName: "bulgaria.jpg",
@@ -275,7 +290,7 @@
                     replyTo: new List<Regex>
                     {
                         new Regex(@"\bsh(te)? piem li\b", RegexOptions.IgnoreCase),
-                        new Regex(@"\bще пием ли\b", RegexOptions.IgnoreCase)
+                        new Regex(@"\bще пием ли\b", RegexOptions.IgnoreCase),
                     }),
                 new TextReply(
                     message: "Екстра съм, бепце 😊",
@@ -303,7 +318,7 @@
                     replyTo: new List<Regex>
                     {
                         new Regex(@"\braki(a|q)\b", RegexOptions.IgnoreCase),
-                        new Regex(@"\bракия\b", RegexOptions.IgnoreCase)
+                        new Regex(@"\bракия\b", RegexOptions.IgnoreCase),
                     }),
                 new TextReply(
                     message: "@ivanmilchev",
@@ -334,7 +349,7 @@
                         new Regex(@"\bмъртъв\b", RegexOptions.IgnoreCase),
                         new Regex(@"\bdead\b", RegexOptions.IgnoreCase),
                         new Regex(@"\bri(p|b)\b", RegexOptions.IgnoreCase),
-                        new Regex(@"\bжив ли си\b", RegexOptions.IgnoreCase)
+                        new Regex(@"\bжив ли си\b", RegexOptions.IgnoreCase),
                     }),
                 new TextReply(
                     message: "I'm just a Bulgarian 😁",

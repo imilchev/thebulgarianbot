@@ -138,7 +138,7 @@
         }
 
         /// <summary>
-        /// A list containing the texts to be used for the /typical command.
+        /// Gets a list containing the texts to be used for the /typical command.
         /// </summary>
         public static IReadOnlyList<TypicalText> TypicalTextsList { get; }
     }

@@ -25,7 +25,7 @@
         }
 
         /// <summary>
-        /// Gets or sets the file ID of the sticker to send as reply.
+        /// Gets the file ID of the sticker to send as reply.
         /// </summary>
         public string FileId { get; }
 

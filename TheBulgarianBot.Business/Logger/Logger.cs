@@ -7,8 +7,6 @@
     /// </summary>
     public static class Logger
     {
-        public static Serilog.Core.Logger Instance { get; }
-
         static Logger()
         {
             Logger.Instance = new LoggerConfiguration()
@@ -16,5 +14,10 @@
                 .WriteTo.Console()
                 .CreateLogger();
         }
+
+        /// <summary>
+        /// Gets the logger instance.
+        /// </summary>
+        public static Serilog.Core.Logger Instance { get; }
     }
 }

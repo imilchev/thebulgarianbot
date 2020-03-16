@@ -11,7 +11,7 @@
         /// <summary>
         /// The current assembly's name.
         /// </summary>
-        private const string assemblyName = "TheBulgarianBot.Business";
+        private const string AssemblyName = "TheBulgarianBot.Business";
 
         /// <summary>
         /// Gets the specified resource from the assembly manifest.
@@ -20,8 +20,8 @@
         /// <returns>A stream containing the resource.</returns>
         public static Stream LoadResource(string resource)
         {
-            var assembly = Assembly.Load(new AssemblyName(ResourceLoader.assemblyName));
-            var resourceName = $"{ResourceLoader.assemblyName}.Resource.{resource}";
+            var assembly = Assembly.Load(new AssemblyName(ResourceLoader.AssemblyName));
+            var resourceName = $"{ResourceLoader.AssemblyName}.Resource.{resource}";
 
             return assembly.GetManifestResourceStream(resourceName);
         }

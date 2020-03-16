@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text.RegularExpressions;
     using System.Threading.Tasks;
     using Replies;
     using Telegram.Bot;
@@ -20,14 +19,14 @@
         /// <summary>
         /// Holds the instance for random generation.
         /// </summary>
-        private static readonly Random rand;
+        private static readonly Random Rand;
 
         /// <summary>
         /// Initializes static members of the <see cref="OnMessageHandler"/> class.
         /// </summary>
         static OnMessageHandler()
         {
-            OnMessageHandler.rand = new Random();
+            OnMessageHandler.Rand = new Random();
         }
 
         /// <summary>
@@ -147,7 +146,7 @@
                     await this.SendReply(
                         botClient,
                         message,
-                        mentionReplies[OnMessageHandler.rand.Next(mentionReplies.Count)]);
+                        mentionReplies[OnMessageHandler.Rand.Next(mentionReplies.Count)]);
                 }
                 else
                 {
@@ -226,7 +225,7 @@
             }
 
             return matchingReplies.Count > 0
-                ? matchingReplies[OnMessageHandler.rand.Next(matchingReplies.Count)]
+                ? matchingReplies[OnMessageHandler.Rand.Next(matchingReplies.Count)]
                 : null;
         }
     }

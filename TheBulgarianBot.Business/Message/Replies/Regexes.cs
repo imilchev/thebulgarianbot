@@ -92,7 +92,7 @@
                 new Regex(@"\bhi+\b", RegexOptions.IgnoreCase),
                 new Regex(@"\bhello+\b", RegexOptions.IgnoreCase),
                 new Regex(@"\beho+\b", RegexOptions.IgnoreCase),
-                new Regex(@"\bехо+\b", RegexOptions.IgnoreCase)
+                new Regex(@"\bехо+\b", RegexOptions.IgnoreCase),
             };
             Regexes.BlackRegexes = new List<Regex>
             {

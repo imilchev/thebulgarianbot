@@ -11,11 +11,6 @@
     public class TheBulgarianBot
     {
         /// <summary>
-        /// The access token for the bot.
-        /// </summary>
-        private const string token = "302251638:AAF2FAcJomslmYVI_j6kTLEpyd5NjriNmyU";
-
-        /// <summary>
         /// The bot client.
         /// </summary>
         private readonly TelegramBotClient botClient;
@@ -28,7 +23,8 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="TheBulgarianBot"/> class.
         /// </summary>
-        public TheBulgarianBot()
+        /// <param name="token">The access token for the bot.</param>
+        public TheBulgarianBot(string token)
         {
             this.botClient = new TelegramBotClient(token);
             this.onMessageHandler = new OnMessageHandler();
