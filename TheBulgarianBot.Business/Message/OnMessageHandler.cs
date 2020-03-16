@@ -219,7 +219,7 @@
                     matchingReplies = replies.Where(r => r.ReplyToText.Any(m => m.IsMatch(message.Text))).ToList();
                     break;
                 case MessageType.Sticker:
-                    matchingReplies = replies.Where(r => r.ReplyToFileId.Any(m => m.Equals(message.Sticker.FileId)))
+                    matchingReplies = replies.Where(r => r.ReplyToFileId.Any(m => m.Equals(message.Sticker.FileUniqueId)))
                         .ToList();
                     break;
             }

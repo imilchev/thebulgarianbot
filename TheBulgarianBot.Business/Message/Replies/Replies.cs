@@ -231,7 +231,10 @@
                         new Regex(@"\bзадай\b", RegexOptions.IgnoreCase),
                         new Regex(@"\bzadai\b", RegexOptions.IgnoreCase),
                     },
-                    replyToFileId: new List<string> { "CAADBAADfwEAAmtfiwZX_aFaLIRcqwI" }),
+                    replyToFileId: new List<string> {
+                        "CAADBAADfwEAAmtfiwZX_aFaLIRcqwI",
+                        "AgADfwEAAmtfiwY",
+                    }),
                 new TextReply(
                     message: "Every time is a good time for drinking!",
                     replyTo: new List<Regex>
