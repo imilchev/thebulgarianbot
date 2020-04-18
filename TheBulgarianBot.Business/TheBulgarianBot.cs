@@ -1,6 +1,7 @@
 ﻿namespace TheBulgarianBot.Business
 {
     using System.Threading;
+    using global::TheBulgarianBot.Business.Message.GeneralaCommand;
     using Message;
     using Telegram.Bot;
     using Telegram.Bot.Args;
@@ -24,10 +25,13 @@
         /// Initializes a new instance of the <see cref="TheBulgarianBot"/> class.
         /// </summary>
         /// <param name="token">The access token for the bot.</param>
-        public TheBulgarianBot(string token)
+        /// <param name="imagesFolderPath">The path to the images folder.</param>
+        public TheBulgarianBot(string token, string imagesFolderPath)
         {
             this.botClient = new TelegramBotClient(token);
-            this.onMessageHandler = new OnMessageHandler();
+
+            var generalaCommandHandler = new GeneralaCommandHandler(imagesFolderPath);
+            this.onMessageHandler = new OnMessageHandler(generalaCommandHandler);
 
             this.botClient.OnMessage += this.OnMessage;
         }

@@ -27,4 +27,6 @@ ENV ASPNETCORE_ENVIRONMENT "Development"
 WORKDIR /app
 COPY --from=build /app/TheBulgarianBot.Application/out ./
 
+COPY images/. ./images
+
 ENTRYPOINT ["dotnet", "TheBulgarianBot.Application.dll"]

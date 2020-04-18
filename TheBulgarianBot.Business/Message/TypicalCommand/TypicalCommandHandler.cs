@@ -17,19 +17,6 @@
     internal static class TypicalCommandHandler
     {
         /// <summary>
-        /// Holds the instance for random generation.
-        /// </summary>
-        private static readonly Random Rand;
-
-        /// <summary>
-        /// Initializes static members of the <see cref="TypicalCommandHandler"/> class.
-        /// </summary>
-        static TypicalCommandHandler()
-        {
-            TypicalCommandHandler.Rand = new Random();
-        }
-
-        /// <summary>
         /// Handles the /typical command, by retrieving the user's profile picture and putting a random text on it.
         /// </summary>
         /// <param name="botClient">The telegram bot client instance.</param>
@@ -50,12 +37,12 @@
 
                 // Get a random picture of that size.
                 var profilePic =
-                    profilePicsFilteredList[TypicalCommandHandler.Rand.Next(profilePicsFilteredList.Count)];
+                    profilePicsFilteredList[Randomizer.Random.Next(profilePicsFilteredList.Count)];
 
                 // Retrieve the picture itself.
                 using var profilePicStream = new MemoryStream();
                 var text =
-                    TypicalTexts.TypicalTextsList[TypicalCommandHandler.Rand.Next(TypicalTexts.TypicalTextsList.Count)];
+                    TypicalTexts.TypicalTextsList[Randomizer.Random.Next(TypicalTexts.TypicalTextsList.Count)];
 
                 var profileFile = await botClient.GetFileAsync(profilePic.FileId);
                 await botClient.DownloadFileAsync(profileFile.FilePath, profilePicStream);
@@ -124,7 +111,7 @@
                 ms.Position = 0;
 
                 // Wait for the call to return, otherwise the objects will be disposed before they are sent.
-                botClient.SendPhotoAsync(message.Chat.Id, new InputOnlineFile(ms, "typical.png")).Wait();
+                await botClient.SendPhotoAsync(message.Chat.Id, new InputOnlineFile(ms, "typical.png"));
 
                 // Dispose the font and paths since they are not in a using statement.
                 font.Dispose();

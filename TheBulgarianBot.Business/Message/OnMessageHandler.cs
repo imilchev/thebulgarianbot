@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using global::TheBulgarianBot.Business.Message.GeneralaCommand;
     using Replies;
     using Telegram.Bot;
     using Telegram.Bot.Args;
@@ -17,16 +18,17 @@
     internal class OnMessageHandler
     {
         /// <summary>
-        /// Holds the instance for random generation.
+        /// Holds the instance of the <see cref="GeneralaCommandHandler"/>.
         /// </summary>
-        private static readonly Random Rand;
+        private readonly GeneralaCommandHandler generalaCommandHandler;
 
         /// <summary>
-        /// Initializes static members of the <see cref="OnMessageHandler"/> class.
+        /// Initializes a new instance of the <see cref="OnMessageHandler"/> class.
         /// </summary>
-        static OnMessageHandler()
+        /// <param name="generalaCommandHandler">The instance of the <see cref="GeneralaCommandHandler"/>.</param>
+        internal OnMessageHandler(GeneralaCommandHandler generalaCommandHandler)
         {
-            OnMessageHandler.Rand = new Random();
+            this.generalaCommandHandler = generalaCommandHandler;
         }
 
         /// <summary>
@@ -123,6 +125,10 @@
             {
                 await TypicalCommandHandler.HandleTypicalCommand(botClient, message);
             }
+            else if (message.Text.StartsWith("/generala"))
+            {
+                await this.generalaCommandHandler.HandleGeneralaCommand(botClient, message);
+            }
         }
 
         /// <summary>
@@ -140,13 +146,13 @@
                 (message.Entities.Any(x => x.Type == MessageEntityType.TextMention) ||
                  message.Entities.Count(x => x.Type == MessageEntityType.Mention) > 1))
             {
-                if (message.From.Username != null && !MentionReply.IsReplyToUsernameEqualTo(message, "ivanmilchev"))
+                if (!MentionReply.IsReplyToUsernameEqualTo(message, "ivanmilchev"))
                 {
                     var mentionReplies = Replies.Replies.MentionReplies;
                     await this.SendReply(
                         botClient,
                         message,
-                        mentionReplies[OnMessageHandler.Rand.Next(mentionReplies.Count)]);
+                        mentionReplies[Randomizer.Random.Next(mentionReplies.Count)]);
                 }
                 else
                 {
@@ -225,7 +231,7 @@
             }
 
             return matchingReplies.Count > 0
-                ? matchingReplies[OnMessageHandler.Rand.Next(matchingReplies.Count)]
+                ? matchingReplies[Randomizer.Random.Next(matchingReplies.Count)]
                 : null;
         }
     }

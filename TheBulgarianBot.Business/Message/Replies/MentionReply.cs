@@ -77,7 +77,8 @@
 
             if (entity != null)
             {
-                return !(entity.User.Username == null) && entity.User.Username.Equals(username, StringComparison.OrdinalIgnoreCase);
+                return !(entity.User.Username == null) &&
+                    entity.User.Username.Equals(username, StringComparison.OrdinalIgnoreCase);
             }
 
             var text = message.Text;

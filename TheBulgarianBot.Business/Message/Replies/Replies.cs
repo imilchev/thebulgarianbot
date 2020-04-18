@@ -231,7 +231,8 @@
                         new Regex(@"\bзадай\b", RegexOptions.IgnoreCase),
                         new Regex(@"\bzadai\b", RegexOptions.IgnoreCase),
                     },
-                    replyToFileId: new List<string> {
+                    replyToFileId: new List<string>
+                    {
                         "CAADBAADfwEAAmtfiwZX_aFaLIRcqwI",
                         "AgADfwEAAmtfiwY",
                     }),

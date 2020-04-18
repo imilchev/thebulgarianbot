@@ -12,7 +12,7 @@ namespace TheBulgarianBot.Application
 
         public Worker(IConfiguration config)
         {
-            this.theBulgarianBot = new Business.TheBulgarianBot(config["BotToken"]);
+            this.theBulgarianBot = new Business.TheBulgarianBot(config["BotToken"], config["ImagesFolder"]);
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
