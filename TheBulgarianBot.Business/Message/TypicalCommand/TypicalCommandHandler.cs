@@ -26,7 +26,6 @@
         {
             // Get the profile pics for the user.
             var profilePics = await botClient.GetUserProfilePhotosAsync(message.From.Id);
-
             if (profilePics.TotalCount > 0)
             {
                 // Filter the profile pics by getting a random one from them and then getting it in a size
