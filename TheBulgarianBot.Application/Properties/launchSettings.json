@@ -3,10 +3,11 @@
     "TheBulgarianBot.Application": {
       "commandName": "Project",
       "launchBrowser": true,
+      "applicationUrl": "http://localhost:5001/",
       "environmentVariables": {
-        "DOTNET_ENVIRONMENT": "Development"
-      },
-      "applicationUrl": "http://localhost:5001/"
+        "DOTNET_ENVIRONMENT": "Development",
+        "DYLD_LIBRARY_PATH": "/opt/homebrew/lib"
+      }
     }
   }
 }

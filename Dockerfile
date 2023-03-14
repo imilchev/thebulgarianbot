@@ -1,5 +1,5 @@
 # Cannot build on armv7
-FROM mcr.microsoft.com/dotnet/sdk:5.0-bullseye-slim-arm64v8 AS build
+FROM mcr.microsoft.com/dotnet/sdk:7.0-bullseye-slim-arm64v8 AS build
 WORKDIR /app
 
 # copy csproj and restore as distinct layers
@@ -14,7 +14,7 @@ COPY TheBulgarianBot.Business/. ./TheBulgarianBot.Business/
 WORKDIR /app/TheBulgarianBot.Application
 RUN dotnet publish -c Release -o out
 
-FROM mcr.microsoft.com/dotnet/runtime:5.0-bullseye-slim-arm32v7 AS runtime
+FROM mcr.microsoft.com/dotnet/runtime:7.0-bullseye-slim-arm64v8 AS runtime
 
 RUN apt update && apt install libgdiplus -y
 # RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
